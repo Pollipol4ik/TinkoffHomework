@@ -15,6 +15,10 @@ public class TestTask1 {
         String videoLength1 = "120:45";
         int expectedTotalSeconds1 = 120 * 60 + 45;
         assertEquals(expectedTotalSeconds1, task.getVideoLengthInSeconds(videoLength1));
+
+        String videoLength2 = "10:60";
+        int expectedTotalSeconds2 = -1;
+        assertEquals(expectedTotalSeconds2, task.getVideoLengthInSeconds(videoLength2));
     }
 
 

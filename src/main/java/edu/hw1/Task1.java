@@ -7,6 +7,9 @@ public class Task1 {
         String[] timeArray = videoLength.split(":");
         int minutes = Integer.parseInt(timeArray[0]);
         int seconds = Integer.parseInt(timeArray[1]);
+        if (seconds >= SECONDS_IN_MINUTE) {
+            return -1;
+        }
         return minutes * SECONDS_IN_MINUTE + seconds;
     }
 }
