@@ -23,6 +23,9 @@ public class Task5 {
     }
 
     public boolean isPalindrome(int number) {
+        if (number < TEN) {
+            return false;
+        }
         String num = String.valueOf(number);
         int sizeNum = num.length();
         for (int i = 0; i < sizeNum; i++) {

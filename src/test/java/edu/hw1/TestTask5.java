@@ -55,22 +55,55 @@ public class TestTask5 {
         assertTrue(result4);
 
     }
+
     @Test
     public void testIsPalindromOrHasItFive() {
         Task5 task = new Task5();
 
         int number4 = 12;
-        boolean result4 = task.isPalindrome(number4);
+        boolean result4 = task.isPalindromeDescendant(number4);
         assertFalse(result4);
 
     }
+
     @Test
     public void testIsPalindromOrHasItSix() {
         Task5 task = new Task5();
 
         int number4 = 312;
-        boolean result4 = task.isPalindrome(number4);
+        boolean result4 = task.isPalindromeDescendant(number4);
         assertFalse(result4);
 
     }
+
+    @Test
+    public void testIsPalindromOrHasItSeven() {
+        Task5 task = new Task5();
+
+        int number4 = 0;
+        boolean result4 = task.isPalindromeDescendant(number4);
+        assertFalse(result4);
+
+    }
+
+    @Test
+    public void testIsPalindromOrHasItEight() {
+        Task5 task = new Task5();
+
+        int number4 = 45678;
+        boolean result4 = task.isPalindromeDescendant(number4);
+        assertFalse(result4);
+
+    }
+
+    @Test
+    public void testIsPalindromOrHasItNine() {
+        Task5 task = new Task5();
+
+        int number4 = 121;
+        boolean result4 = task.isPalindromeDescendant(number4);
+        assertTrue(result4);
+
+    }
+
 }
