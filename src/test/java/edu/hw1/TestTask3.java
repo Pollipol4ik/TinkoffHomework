@@ -10,15 +10,42 @@ public class TestTask3 {
     public void testIsNested() {
         Task3 task = new Task3();
         int[] arr1 = {1, 2, 3, 4};
-        int[] arr2 = {0,6};
+        int[] arr2 = {0, 6};
 
         boolean result = task.isNestable(arr1, arr2);
 
         assertTrue(result, "arr1 is nested in arr2");
-        int[] arr3 = {1, 2, 3, 4};
-        int[] arr4 = {2,3};
 
-        result = task.isNestable(arr3, arr4);
+    }
+    @Test
+    public void testIsNestedTwo() {
+        Task3 task = new Task3();
+        int[] arr1 = {3, 1};
+        int[] arr2 = {4, 0};
+
+        boolean result = task.isNestable(arr1, arr2);
+
+        assertTrue(result, "arr1 is nested in arr2");
+
+    }
+
+    @Test
+    public void testIsNotNested() {
+        Task3 task = new Task3();
+        int[] arr3 = {1, 2, 3, 4};
+        int[] arr4 = {2, 3};
+
+        boolean result = task.isNestable(arr3, arr4);
+
+        assertFalse(result, "arr3 is not nested in arr4");
+    }
+    @Test
+    public void testIsNotNestedTwo() {
+        Task3 task = new Task3();
+        int[] arr3 = {9, 9, 8};
+        int[] arr4 = {8, 9};
+
+        boolean result = task.isNestable(arr3, arr4);
 
         assertFalse(result, "arr3 is not nested in arr4");
     }

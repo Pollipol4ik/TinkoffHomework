@@ -1,6 +1,6 @@
 package edu.hw1;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestTask1 {
@@ -11,16 +11,22 @@ public class TestTask1 {
         String videoLength = "5:30";
         int expectedTotalSeconds = 5 * 60 + 30;
         assertEquals(expectedTotalSeconds, task.getVideoLengthInSeconds(videoLength));
+    }
 
+    @Test
+    public void testGetVideoLengthInSecondsMinutes() {
+        Task1 task = new Task1();
         String videoLength1 = "120:45";
         int expectedTotalSeconds1 = 120 * 60 + 45;
         assertEquals(expectedTotalSeconds1, task.getVideoLengthInSeconds(videoLength1));
+    }
 
+    @Test
+    public void testIncorrect() {
+        Task1 task = new Task1();
         String videoLength2 = "10:60";
         int expectedTotalSeconds2 = -1;
         assertEquals(expectedTotalSeconds2, task.getVideoLengthInSeconds(videoLength2));
     }
-
-
 
 }

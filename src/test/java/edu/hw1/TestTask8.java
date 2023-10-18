@@ -19,7 +19,11 @@ class TestTask8 {
             {0, 0, 0, 0, 1, 0, 0, 0}
         };
         assertTrue(task.isSafe(safeBoard));
+    }
 
+    @Test
+    void testIsNotSafe() {
+        Task8 task = new Task8();
         int[][] unsafeBoard = {
             {0, 0, 0, 0, 1, 0, 0, 0},
             {0, 0, 0, 0, 0, 1, 0, 0},
@@ -33,4 +37,21 @@ class TestTask8 {
 
         assertFalse(task.isSafe(unsafeBoard));
     }
+    @Test
+    void testIsNotSafeTwo() {
+        Task8 task = new Task8();
+        int[][] unsafeBoard = {
+            {1, 0, 1, 0, 1, 0, 1, 0},
+            {0, 1, 0, 1, 0, 1, 0, 1},
+            {0, 0, 0, 0, 1, 0, 1, 0},
+            {0, 0, 1, 0, 0, 1, 0, 1},
+            {1, 0, 0, 0, 1, 0, 1, 0},
+            {0, 0, 0, 0, 0, 1, 0, 1},
+            {1, 0, 0, 0, 1, 0, 1, 0},
+            {0, 0, 0, 1, 0, 1, 0, 1}
+        };
+
+        assertFalse(task.isSafe(unsafeBoard));
+    }
+
 }
