@@ -64,4 +64,13 @@ public class TestTask5 {
         assertFalse(result4);
 
     }
+    @Test
+    public void testIsPalindromOrHasItSix() {
+        Task5 task = new Task5();
+
+        int number4 = 312;
+        boolean result4 = task.isPalindrome(number4);
+        assertFalse(result4);
+
+    }
 }
