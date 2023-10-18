@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TestTask8 {
     @Test
     void testIsSafe() {
+        Task8 task = new Task8();
         int[][] safeBoard = {
             {0, 0, 0, 1, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
@@ -17,7 +18,7 @@ class TestTask8 {
             {0, 1, 0, 0, 0, 0, 0, 1},
             {0, 0, 0, 0, 1, 0, 0, 0}
         };
-        assertTrue(Task8.isSafe(safeBoard));
+        assertTrue(task.isSafe(safeBoard));
 
         int[][] unsafeBoard = {
             {0, 0, 0, 0, 1, 0, 0, 0},
@@ -30,6 +31,6 @@ class TestTask8 {
             {1, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        assertFalse(Task8.isSafe(unsafeBoard));
+        assertFalse(task.isSafe(unsafeBoard));
     }
 }

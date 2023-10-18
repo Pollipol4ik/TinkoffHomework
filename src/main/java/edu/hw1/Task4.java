@@ -1,13 +1,11 @@
 package edu.hw1;
 
-import java.util.Scanner;
-
 public class Task4 {
     protected Task4() {
 
     }
 
-    public static String fixString(String input) {
+    public String fixString(String input) {
         StringBuilder sb = new StringBuilder(input.length());
 
         for (int i = 0; i < input.length() - 1; i += 2) {
@@ -23,10 +21,4 @@ public class Task4 {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
-        String fixedString = fixString(input);
-        System.out.println(fixedString);
-    }
 }

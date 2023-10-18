@@ -5,21 +5,22 @@ public class TestTask6 {
 
     @Test
     public void testFindKaprekarSteps() {
-        int result = Task6.findKaprekarSteps(6174, 0);
+        Task6 task = new Task6();
+        int result = task.findKaprekarSteps(6174, 0);
         assertEquals(0, result);
 
-        int result1 = Task6.findKaprekarSteps(6621, 0);
+        int result1 = task.findKaprekarSteps(6621, 0);
         assertEquals(5, result1);
 
 
-        int result2 = Task6.findKaprekarSteps(1234, 0);
+        int result2 = task.findKaprekarSteps(1234, 0);
         assertEquals(3, result2);
 
 
-        int result3 = Task6.findKaprekarSteps(5432, 0);
+        int result3 = task.findKaprekarSteps(5432, 0);
         assertEquals(3, result3);
 
-        int result4 = Task6.findKaprekarSteps(6554, 0);
+        int result4 = task.findKaprekarSteps(6554, 0);
         assertEquals(4, result4);
 
     }

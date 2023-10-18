@@ -1,13 +1,11 @@
 package edu.hw1;
 
-import java.util.Scanner;
-
 public class Task3 {
     protected Task3() {
 
     }
 
-    public static boolean isNestable(int[] arr1, int[] arr2) {
+    public boolean isNestable(int[] arr1, int[] arr2) {
         if (arr1.length == 0 || arr2.length == 0) {
             return false;
         }
@@ -28,23 +26,6 @@ public class Task3 {
         }
 
         return minArr1 > minArr2 && maxArr1 < maxArr2;
-    }
-
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        int size1 = input.nextInt();
-        int[] arr1 = new int[size1];
-        for (int i = 0; i < size1; i++) {
-            arr1[i] = input.nextInt();
-        }
-        int size2 = input.nextInt();
-        int[] arr2 = new int[size2];
-        for (int i = 0; i < size2; i++) {
-            arr2[i] = input.nextInt();
-        }
-        boolean isNested = isNestable(arr1, arr2);
-        System.out.println(isNested);
-
     }
 
 }

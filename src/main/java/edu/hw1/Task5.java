@@ -1,26 +1,18 @@
 package edu.hw1;
 
-import java.util.Scanner;
-
 public class Task5 {
+    private static final int TEN = 10;
+
     protected Task5() {
 
     }
 
-    public static void main(String[] args) {
-
-        Scanner in = new Scanner(System.in);
-        int number = in.nextInt();
-        boolean isPalindromeOrHasIt = isPalindromeDescendant(number);
-        System.out.println(isPalindromeOrHasIt);
-    }
-
-    public static boolean isPalindromeDescendant(int number) {
+    public boolean isPalindromeDescendant(int number) {
         if (isPalindrome(number)) {
             return true;
         }
         int num = number;
-        while (num >= 10) {
+        while (num >= TEN) {
             num = generateDescendant(num);
             if (isPalindrome(num)) {
                 return true;
@@ -30,7 +22,7 @@ public class Task5 {
         return false;
     }
 
-    public static boolean isPalindrome(int number) {
+    public boolean isPalindrome(int number) {
         String num = String.valueOf(number);
         int sizeNum = num.length();
         for (int i = 0; i < sizeNum; i++) {
@@ -41,7 +33,7 @@ public class Task5 {
         return true;
     }
 
-    public static int generateDescendant(int number) {
+    public int generateDescendant(int number) {
         String num = String.valueOf(number);
         int sizeNum = num.length();
         String res = "";

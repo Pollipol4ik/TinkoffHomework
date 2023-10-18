@@ -1,15 +1,18 @@
 package edu.hw1;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Task6 {
+    private static final int DIGIT = 6174;
+    private static final int TEN = 10;
+    private static final int DIGIT_SIZE = 4;
+
     protected Task6() {
 
     }
 
-    public static int findKaprekarSteps(int n, int steps) {
-        if (n == 6174) {
+    public int findKaprekarSteps(int n, int steps) {
+        if (n == DIGIT) {
             return steps;
         }
 
@@ -25,25 +28,25 @@ public class Task6 {
         return findKaprekarSteps(result, steps + 1);
     }
 
-    private static int[] getDigits(int n) {
-        int[] digits = new int[4];
+    private int[] getDigits(int n) {
+        int[] digits = new int[DIGIT_SIZE];
         int num = n;
-        for (int i = 3; i >= 0; i--) {
-            digits[i] = num % 10;
-            num /= 10;
+        for (int i = DIGIT_SIZE - 1; i >= 0; i--) {
+            digits[i] = num % TEN;
+            num /= TEN;
         }
         return digits;
     }
 
-    private static int digitsToNumber(int[] digits) {
+    private int digitsToNumber(int[] digits) {
         int number = 0;
         for (int i = 0; i < digits.length; i++) {
-            number = number * 10 + digits[i];
+            number = number * TEN + digits[i];
         }
         return number;
     }
 
-    private static void reverseArray(int[] arr) {
+    private void reverseArray(int[] arr) {
         int start = 0;
         int end = arr.length - 1;
         while (start < end) {
@@ -53,12 +56,5 @@ public class Task6 {
             start++;
             end--;
         }
-    }
-
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        int steps = findKaprekarSteps(n, 0);
-        System.out.println(steps);
     }
 }
