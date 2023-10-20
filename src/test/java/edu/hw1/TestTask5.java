@@ -10,7 +10,10 @@ public class TestTask5 {
     @CsvSource(value = {
         "11, true",
         "121, true",
-        "323, true"
+        "323, true",
+        "123321, true",
+        "10101, true",
+        "55555, true"
     })
     @DisplayName("Ввод строк являющихся палиндром")
     public void testIsPalindrome(int input, boolean ans) {
@@ -47,7 +50,9 @@ public class TestTask5 {
     @ParameterizedTest
     @CsvSource(value = {
         "-121, false",
-        "-5678, false"
+        "-5678, false",
+        "-11, false",
+        "-1, false",
     })
     @DisplayName("Ввод отрицательных чисел")
     public void isPalindromeDescendanIsNegative(int input,boolean ans ) {

@@ -8,18 +8,13 @@ public class Task2 {
     }
 
     public static int countDigits(int number) {
-        if (number == 0) {
-            return 1;
-        }
 
-        int count = 0;
-        int num = Math.abs(number);
-
-        while (num != 0) {
+        int num = number;
+        int counter = 1;
+        while (Math.abs(num) > TEN - 1) {
             num /= TEN;
-            count++;
+            counter++;
         }
-
-        return count;
+        return counter;
     }
 }
