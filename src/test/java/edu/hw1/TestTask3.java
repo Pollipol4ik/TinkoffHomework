@@ -1,102 +1,33 @@
 package edu.hw1;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+import java.util.stream.Stream;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestTask3 {
-
-    @Test
-    public void testIsNested() {
-        Task3 task = new Task3();
-        int[] arr1 = {1, 2, 3, 4};
-        int[] arr2 = {0, 6};
-
-        boolean result = task.isNestable(arr1, arr2);
-
-        assertTrue(result, "arr1 is nested in arr2");
-
+    @ParameterizedTest
+    @ArgumentsSource(ArgumentProviderThird.class)
+    @DisplayName("Nestable array tests")
+    public void isNestable_shouldReturnValue_whenCorrectInput(int[] firstArray, int[] secondArray, boolean ans) {
+        assertThat(Task3.isNestable(firstArray, secondArray)).isEqualTo(ans);
     }
 
-    @Test
-    public void testIsNestedTwo() {
-        Task3 task = new Task3();
-        int[] arr1 = {3, 1};
-        int[] arr2 = {4, 0};
+}
 
-        boolean result = task.isNestable(arr1, arr2);
+final class ArgumentProviderThird implements ArgumentsProvider {
 
-        assertTrue(result, "arr1 is nested in arr2");
-
-    }
-
-    @Test
-    public void testIsNestedThree() {
-        Task3 task = new Task3();
-        int[] arr1 = {3};
-        int[] arr2 = {};
-
-        boolean result = task.isNestable(arr1, arr2);
-
-        assertFalse(result, "arr3 is not nested in arr4");
-
-    }
-
-    @Test
-    public void testIsNestedFour() {
-        Task3 task = new Task3();
-        int[] arr1 = {1};
-        int[] arr2 = {1};
-
-        boolean result = task.isNestable(arr1, arr2);
-
-        assertFalse(result, "arr3 is not nested in arr4");
-
-    }
-
-    @Test
-    public void testIsNestedFive() {
-        Task3 task = new Task3();
-        int[] arr1 = {-1};
-        int[] arr2 = {-2};
-
-        boolean result = task.isNestable(arr1, arr2);
-
-        assertFalse(result, "arr3 is not nested in arr4");
-
-    }
-
-    @Test
-    public void testIsNestedSix() {
-        Task3 task = new Task3();
-        int[] arr1 = {1};
-        int[] arr2 = {0, 2, 3};
-
-        boolean result = task.isNestable(arr1, arr2);
-
-        assertTrue(result, "arr3 is nested in arr4");
-
-    }
-
-    @Test
-    public void testIsNotNested() {
-        Task3 task = new Task3();
-        int[] arr3 = {1, 2, 3, 4};
-        int[] arr4 = {2, 3};
-
-        boolean result = task.isNestable(arr3, arr4);
-
-        assertFalse(result, "arr3 is not nested in arr4");
-    }
-
-    @Test
-    public void testIsNotNestedTwo() {
-        Task3 task = new Task3();
-        int[] arr3 = {9, 9, 8};
-        int[] arr4 = {8, 9};
-
-        boolean result = task.isNestable(arr3, arr4);
-
-        assertFalse(result, "arr3 is not nested in arr4");
+    @Override
+    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
+        return Stream.of(
+            Arguments.of(new int[] {1, 2, 3, 4}, new int[] {0, 6}, true),
+            Arguments.of(new int[] {3, 1}, new int[] {4, 0}, true),
+            Arguments.of(new int[] {9, 9, 8}, new int[] {8, 9}, false),
+            Arguments.of(new int[] {1, 2, 3, 4}, new int[] {2, 3}, false)
+        );
     }
 }

@@ -4,7 +4,11 @@ public class Task8 {
     private static final int SIZE = 8;
     private static final int POSITION = -2;
 
-    public boolean isSafe(int[][] board) {
+    protected Task8() {
+
+    }
+
+    public static boolean isSafe(int[][] board) {
         int[] dx = {POSITION, POSITION, -1, -1, 1, 1, 2, 2};
         int[] dy = {-1, 1, POSITION, 2, POSITION, 2, -1, 1};
         int n = board.length;

@@ -1,109 +1,36 @@
 package edu.hw1;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestTask5 {
+    @ParameterizedTest
+    @CsvSource(value = {
+        "11, true",
+        "11211230, true",
+        "13001120, true",
+        "23336014, true",
+        "314, true",
+        "121, true"
 
-    @Test
-    public void testIsPalindrome() {
-        Task5 task = new Task5();
-
-        int number1 = 11;
-        boolean result1 = task.isPalindromeDescendant(number1);
-        assertTrue(result1);
-
+    })
+    @DisplayName("Ввод положительного числа")
+    public void testIsPalindromeDescendant(int input, boolean ans) {
+        assertThat(Task5.isPalindromeDescendant(input)).isEqualTo(ans);
     }
 
-    @Test
-    public void testIsPalindromOrHasIt() {
-        Task5 task = new Task5();
-
-        int number1 = 11211230;
-        boolean result1 = task.isPalindromeDescendant(number1);
-        assertTrue(result1);
-
+    @ParameterizedTest
+    @CsvSource(value = {
+        "12, false",
+        "312, false",
+        "0, false",
+        "45678, false"
+    })
+    @DisplayName("Ввод отрицательного числа")
+    public void testIsNotPalindromeDescendant(int input, boolean ans) {
+        assertThat(Task5.isPalindromeDescendant(input)).isEqualTo(ans);
     }
-
-    @Test
-    public void testIsPalindromOrHasItTwo() {
-        Task5 task = new Task5();
-
-        int number2 = 13001120;
-        boolean result2 = task.isPalindromeDescendant(number2);
-        assertTrue(result2);
-
-    }
-
-    @Test
-    public void testIsPalindromOrHasItThree() {
-        Task5 task = new Task5();
-
-        int number3 = 23336014;
-        boolean result3 = task.isPalindromeDescendant(number3);
-        assertTrue(result3);
-
-    }
-
-    @Test
-    public void testIsPalindromOrHasItFour() {
-        Task5 task = new Task5();
-
-        int number4 = 314;
-        boolean result4 = task.isPalindromeDescendant(number4);
-        assertTrue(result4);
-
-    }
-
-    @Test
-    public void testIsPalindromOrHasItFive() {
-        Task5 task = new Task5();
-
-        int number4 = 12;
-        boolean result4 = task.isPalindromeDescendant(number4);
-        assertFalse(result4);
-
-    }
-
-    @Test
-    public void testIsPalindromOrHasItSix() {
-        Task5 task = new Task5();
-
-        int number4 = 312;
-        boolean result4 = task.isPalindromeDescendant(number4);
-        assertFalse(result4);
-
-    }
-
-    @Test
-    public void testIsPalindromOrHasItSeven() {
-        Task5 task = new Task5();
-
-        int number4 = 0;
-        boolean result4 = task.isPalindromeDescendant(number4);
-        assertFalse(result4);
-
-    }
-
-    @Test
-    public void testIsPalindromOrHasItEight() {
-        Task5 task = new Task5();
-
-        int number4 = 45678;
-        boolean result4 = task.isPalindromeDescendant(number4);
-        assertFalse(result4);
-
-    }
-
-    @Test
-    public void testIsPalindromOrHasItNine() {
-        Task5 task = new Task5();
-
-        int number4 = 121;
-        boolean result4 = task.isPalindromeDescendant(number4);
-        assertTrue(result4);
-
-    }
-
 }
+

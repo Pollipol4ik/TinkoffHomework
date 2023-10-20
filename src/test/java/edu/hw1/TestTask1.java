@@ -1,32 +1,32 @@
 package edu.hw1;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestTask1 {
+    @ParameterizedTest
+    @CsvSource(value = {
+        "01:00, 60",
+        "13:56, 836",
+        "120:45, 7245"
 
-    @Test
-    public void testGetVideoLengthInSecondsMinutesSecondsFormat() {
-        Task1 task = new Task1();
-        String videoLength = "5:30";
-        int expectedTotalSeconds = 5 * 60 + 30;
-        assertEquals(expectedTotalSeconds, task.getVideoLengthInSeconds(videoLength));
+    })
+    @DisplayName("Ввод корректной строки")
+    public void minutesToSeconds_shouldReturnValue_whenCorrectInput(String input, int ans) {
+        assertThat(Task1.getVideoLengthInSeconds(input)).isEqualTo(ans);
     }
 
-    @Test
-    public void testGetVideoLengthInSecondsMinutes() {
-        Task1 task = new Task1();
-        String videoLength1 = "120:45";
-        int expectedTotalSeconds1 = 120 * 60 + 45;
-        assertEquals(expectedTotalSeconds1, task.getVideoLengthInSeconds(videoLength1));
+    @ParameterizedTest
+    @CsvSource(value = {
+        "10:60, -1",
+        "13:62, -1",
+        "-4:23, -1"
+    })
+    @DisplayName("Ввод строки c неправильным временем")
+    public void minutesToSeconds_shouldReturnValue_whenIncorrectTime(String input, int ans) {
+        assertThat(Task1.getVideoLengthInSeconds(input)).isEqualTo(ans);
     }
-
-    @Test
-    public void testIncorrect() {
-        Task1 task = new Task1();
-        String videoLength2 = "10:60";
-        int expectedTotalSeconds2 = -1;
-        assertEquals(expectedTotalSeconds2, task.getVideoLengthInSeconds(videoLength2));
-    }
-
 }
+

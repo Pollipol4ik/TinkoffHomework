@@ -6,7 +6,11 @@ import org.apache.logging.log4j.Logger;
 public class Task0 {
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public void sayHello() {
+    protected Task0() {
+
+    }
+
+    public static void sayHello() {
         LOGGER.info("Привет, мир!");
     }
 }

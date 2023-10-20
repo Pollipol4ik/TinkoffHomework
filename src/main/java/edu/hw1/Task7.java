@@ -5,7 +5,7 @@ public class Task7 {
 
     }
 
-    public int rotateLeft(int n, int shift) {
+    public static int rotateLeft(int n, int shift) {
         int cnt = 1;
         int m = n;
         while ((m >>= 1) != 0) {
@@ -14,7 +14,7 @@ public class Task7 {
         return (n << (shift % cnt)) & ((1 << cnt) - 1) | (n >> (cnt - (shift % cnt)));
     }
 
-    public int rotateRight(int n, int shift) {
+    public static int rotateRight(int n, int shift) {
         int cnt = 1;
         int m = n;
         while ((m >>= 1) != 0) {

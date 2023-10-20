@@ -1,57 +1,58 @@
 package edu.hw1;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
+import java.util.stream.Stream;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class TestTask8 {
-    @Test
-    void testIsSafe() {
-        Task8 task = new Task8();
-        int[][] safeBoard = {
-            {0, 0, 0, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 0, 0, 0, 1, 0, 0},
-            {0, 0, 0, 0, 1, 0, 1, 0},
-            {0, 1, 0, 0, 0, 1, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 1, 0, 0, 0, 0, 0, 1},
-            {0, 0, 0, 0, 1, 0, 0, 0}
-        };
-        assertTrue(task.isSafe(safeBoard));
+public class TestTask8 {
+    @ParameterizedTest
+    @ArgumentsSource(ArgumentProviderEighth.class)
+    @DisplayName("Knight board capture test")
+    public void testKnightBoardCapture(int[][] firstArray, boolean ans) {
+        assertThat(Task8.isSafe(firstArray)).isEqualTo(ans);
     }
 
-    @Test
-    void testIsNotSafe() {
-        Task8 task = new Task8();
-        int[][] unsafeBoard = {
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 1, 0, 0},
-            {0, 0, 0, 1, 0, 0, 0, 0},
-            {1, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 1, 0, 0},
-            {0, 0, 0, 0, 0, 1, 0, 0},
-            {1, 0, 0, 0, 0, 0, 0, 0}
-        };
+}
 
-        assertFalse(task.isSafe(unsafeBoard));
+final class ArgumentProviderEighth implements ArgumentsProvider {
+
+    @Override
+    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
+        return Stream.of(
+            Arguments.of(new int[][] {
+                {0, 0, 0, 1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 1, 0, 1, 0},
+                {0, 1, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1, 0, 0, 0}
+            }, true),
+            Arguments.of(new int[][] {
+                {0, 0, 0, 0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 1, 0, 0},
+                {1, 0, 0, 0, 0, 0, 0, 0}}, false),
+            Arguments.of(new int[][] {
+                {1, 0, 1, 0, 1, 0, 1, 0},
+                {0, 1, 0, 1, 0, 1, 0, 1},
+                {0, 0, 0, 0, 1, 0, 1, 0},
+                {0, 0, 1, 0, 0, 1, 0, 1},
+                {1, 0, 0, 0, 1, 0, 1, 0},
+                {0, 0, 0, 0, 0, 1, 0, 1},
+                {1, 0, 0, 0, 1, 0, 1, 0},
+                {0, 0, 0, 1, 0, 1, 0, 1}
+            }, false)
+        );
     }
-    @Test
-    void testIsNotSafeTwo() {
-        Task8 task = new Task8();
-        int[][] unsafeBoard = {
-            {1, 0, 1, 0, 1, 0, 1, 0},
-            {0, 1, 0, 1, 0, 1, 0, 1},
-            {0, 0, 0, 0, 1, 0, 1, 0},
-            {0, 0, 1, 0, 0, 1, 0, 1},
-            {1, 0, 0, 0, 1, 0, 1, 0},
-            {0, 0, 0, 0, 0, 1, 0, 1},
-            {1, 0, 0, 0, 1, 0, 1, 0},
-            {0, 0, 0, 1, 0, 1, 0, 1}
-        };
-
-        assertFalse(task.isSafe(unsafeBoard));
-    }
-
 }

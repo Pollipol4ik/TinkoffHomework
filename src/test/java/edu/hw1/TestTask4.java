@@ -1,44 +1,66 @@
-
 package edu.hw1;
+//
+//import org.junit.jupiter.api.DisplayName;
+//import org.junit.jupiter.api.extension.ExtensionContext;
+//import org.junit.jupiter.params.ParameterizedTest;
+//import org.junit.jupiter.params.provider.Arguments;
+//import org.junit.jupiter.params.provider.ArgumentsProvider;
+//import org.junit.jupiter.params.provider.ArgumentsSource;
+//import java.util.stream.Stream;
+//import static org.assertj.core.api.Assertions.assertThat;
+//
+//public class TestTask4 {
+//    @ParameterizedTest
+//    @ArgumentsSource(ArgumentProviderFourth.class)
+//    @DisplayName("Fix string")
+//    public void testFixString(String input, String ans) {
+//        assertThat(Task4.fixString(input)).isEqualTo(ans);
+//    }
+//
+//}
+//
+//final class ArgumentProviderFourth implements ArgumentsProvider {
+//
+//    @Override
+//    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
+//        return Stream.of(
+//            Arguments.of("123456", "214365"),
+//            Arguments.of("hTsii  s aimex dpus rtni.g", "This is a mixed up string."),
+//            Arguments.of("badce", "abcde"),
+//            Arguments.of("a", "a")
+//
+//        );
+//    }
+//}
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestTask4 {
+    @ParameterizedTest
+    @CsvSource(value = {
+        "123456, 214365",
+        "1287, 2178"
 
-    @Test
-    public void testFixStringEvenCharactersNumber() {
-        Task4 task = new Task4();
-        String input = "123456";
-        String result = task.fixString(input);
-        assertEquals("214365", result);
 
+    })
+    @DisplayName("Ввод положительного числа")
+    public void testFixStringNumber(String input, String ans) {
+        assertThat(Task4.fixString(input)).isEqualTo(ans);
     }
 
-    @Test
-    public void testFixStringEvenCharactersString() {
-        Task4 task = new Task4();
-        String input1 = "hTsii  s aimex dpus rtni.g";
-        String result1 = task.fixString(input1);
-
-        assertEquals("This is a mixed up string.", result1);
-
+    @ParameterizedTest
+    @CsvSource(value = {
+        "hTsii  s aimex dpus rtni.g , This is a mixed up string.",
+        "badce, abcde",
+        "a, a"
+    })
+    @DisplayName("Ввод отрицательного числа")
+    public void testFixStringLetter(String input, String ans) {
+        assertThat(Task4.fixString(input)).isEqualTo(ans);
     }
-
-    @Test
-    public void testFixStringEvenCharactersStringTwo() {
-        Task4 task = new Task4();
-        String input2 = "badce";
-        String result2 = task.fixString(input2);
-        assertEquals("abcde", result2);
-    }
-
-    @Test
-    public void testFixStringEvenCharactersSymbols() {
-        Task4 task = new Task4();
-        String input3 = "a";
-        String result3 = task.fixString(input3);
-        assertEquals("a", result3);
-    }
-
 }
+
+

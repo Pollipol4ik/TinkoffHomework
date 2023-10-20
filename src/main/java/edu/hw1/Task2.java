@@ -3,7 +3,11 @@ package edu.hw1;
 public class Task2 {
     private static final int TEN = 10;
 
-    public int countDigits(int number) {
+    protected Task2() {
+
+    }
+
+    public static int countDigits(int number) {
         if (number == 0) {
             return 1;
         }

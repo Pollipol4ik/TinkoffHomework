@@ -1,41 +1,21 @@
 package edu.hw1;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestTask6 {
-
-    @Test
-    public void testFindKaprekarStepsWithSameNumber() {
-        Task6 task = new Task6();
-        int result = task.findKaprekarSteps(6174, 0);
-        assertEquals(0, result);
-
-    }
-
-    @Test
-    public void testFindKaprekarSteps() {
-        Task6 task = new Task6();
-        int result1 = task.findKaprekarSteps(6621, 0);
-        assertEquals(5, result1);
-
-    }
-
-    @Test
-    public void testFindKaprekarStepsTwo() {
-        Task6 task = new Task6();
-        int result4 = task.findKaprekarSteps(6554, 0);
-        assertEquals(4, result4);
-
-    }
-
-    @Test
-    public void testFindKaprekarStepsThree() {
-        Task6 task = new Task6();
-
-        int result3 = task.findKaprekarSteps(1234, 0);
-        assertEquals(3, result3);
-
+    @ParameterizedTest
+    @CsvSource(value = {
+        "6174, 0, 0",
+        "6621, 0, 5",
+        "6554, 0, 4",
+        "1234, 0, 3"
+    })
+    @DisplayName("Количество шагов")
+    public void testCountSteps(int number, int steps, int ans) {
+        assertThat(Task6.findKaprekarSteps(number,steps)).isEqualTo(ans);
     }
 
 }

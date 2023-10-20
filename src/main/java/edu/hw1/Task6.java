@@ -11,7 +11,7 @@ public class Task6 {
 
     }
 
-    public int findKaprekarSteps(int n, int steps) {
+    public static int findKaprekarSteps(int n, int steps) {
         if (n == DIGIT) {
             return steps;
         }
@@ -26,9 +26,10 @@ public class Task6 {
 
         int result = desc - asc;
         return findKaprekarSteps(result, steps + 1);
+
     }
 
-    private int[] getDigits(int n) {
+    private static int[] getDigits(int n) {
         int[] digits = new int[DIGIT_SIZE];
         int num = n;
         for (int i = DIGIT_SIZE - 1; i >= 0; i--) {
@@ -38,7 +39,7 @@ public class Task6 {
         return digits;
     }
 
-    private int digitsToNumber(int[] digits) {
+    private static int digitsToNumber(int[] digits) {
         int number = 0;
         for (int i = 0; i < digits.length; i++) {
             number = number * TEN + digits[i];
@@ -46,7 +47,7 @@ public class Task6 {
         return number;
     }
 
-    private void reverseArray(int[] arr) {
+    private static void reverseArray(int[] arr) {
         int start = 0;
         int end = arr.length - 1;
         while (start < end) {

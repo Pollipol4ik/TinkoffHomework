@@ -7,7 +7,7 @@ public class Task5 {
 
     }
 
-    public boolean isPalindromeDescendant(int number) {
+    public static boolean isPalindromeDescendant(int number) {
         if (isPalindrome(number)) {
             return true;
         }
@@ -22,7 +22,7 @@ public class Task5 {
         return false;
     }
 
-    public boolean isPalindrome(int number) {
+    public static boolean isPalindrome(int number) {
         if (number < TEN) {
             return false;
         }
@@ -36,7 +36,7 @@ public class Task5 {
         return true;
     }
 
-    public int generateDescendant(int number) {
+    public static int generateDescendant(int number) {
         String num = String.valueOf(number);
         int sizeNum = num.length();
         String res = "";

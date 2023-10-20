@@ -5,7 +5,7 @@ public class Task4 {
 
     }
 
-    public String fixString(String input) {
+    public static String fixString(String input) {
         StringBuilder sb = new StringBuilder(input.length());
 
         for (int i = 0; i < input.length() - 1; i += 2) {
