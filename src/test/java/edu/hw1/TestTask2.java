@@ -9,6 +9,7 @@ public class TestTask2 {
 
     @ParameterizedTest
     @CsvSource(value = {
+        "9, 1",
         "10, 2",
         "123, 3",
         "4666, 4",
@@ -24,7 +25,8 @@ public class TestTask2 {
         "-9, 1",
         "-10, 2",
         "-123, 3",
-        "-5466, 4"
+        "-5466, 4",
+        "-10023, 5"
     })
     @DisplayName("Ввод отрицательных чисел")
     void countDigitsInputNegativeNumbers(int number, int ans) {
