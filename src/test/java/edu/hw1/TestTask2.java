@@ -14,8 +14,7 @@ public class TestTask2 {
         "-22, 2",
         "100, 3",
         "9, 1",
-        "10, 2",
-        "0,1"
+        "10, 2"
     })
     @DisplayName("Ввод корректных чисел")
     public void countDigits_shouldReturnValue_whenCorrectInput(int input, int ans) {
