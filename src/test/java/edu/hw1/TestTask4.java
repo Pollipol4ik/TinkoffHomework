@@ -15,7 +15,8 @@ public class TestTask4 {
         "0, 0",
         "hTsii  s aimex dpus rtni.g , This is a mixed up string.",
         "badce, abcde",
-        "a, a"
+        "a, a",
+        "abcdef, badcfe"
 
     })
     @DisplayName("Ввод корректных данныа")
@@ -27,6 +28,12 @@ public class TestTask4 {
     public void fixString_shouldReturnException_whenInputEmpty() {
         String input = "";
         assertThatThrownBy(()->Task4.fixString(input)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("Ввод нулево строки")
+    public void fixString_shouldReturnException_whenInputNull() {
+        assertThatThrownBy(()->Task4.fixString(null)).isInstanceOf(NullPointerException.class);
     }
 }
 

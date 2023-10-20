@@ -6,8 +6,8 @@ public class Task4 {
     }
 
     public static String fixString(String input) {
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException("Empty string");
+        if (input == null) {
+            throw new NullPointerException("Null string");
         }
         StringBuilder sb = new StringBuilder(input.length());
         if (input.isEmpty()) {
