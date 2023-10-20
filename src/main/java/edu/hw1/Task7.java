@@ -14,9 +14,6 @@ public class Task7 {
         while ((m >>= 1) != 0) {
             cnt++;
         }
-        if (n < 0 || shift < 0) {
-            return -1;
-        }
         return (n << (shift % cnt)) & ((1 << cnt) - 1) | (n >> (cnt - (shift % cnt)));
     }
 

@@ -7,7 +7,7 @@ public class Task6 {
     private static final int TEN = 10;
     private static final int DIGIT_SIZE = 4;
     private final static int MIN_VALUE = 1000;
-    private final static int MAX_VALUE = 9998;
+    private final static int MAX_VALUE = 9999;
 
     protected Task6() {
 
