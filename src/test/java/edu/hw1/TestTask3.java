@@ -28,6 +28,7 @@ final class ArgumentProviderThird implements ArgumentsProvider {
             Arguments.of(new int[] {3, 1}, new int[] {4, 0}, true),
             Arguments.of(new int[] {3}, new int[] {}, false),
             Arguments.of(new int[] {1}, new int[] {1}, false),
+            Arguments.of(new int[] {}, new int[] {}, false),
             Arguments.of(new int[] {-1}, new int[] {-2}, false),
             Arguments.of(new int[] {1}, new int[] {0, 2, 3}, true),
             Arguments.of(new int[] {9, 9, 8}, new int[] {8, 9}, false),

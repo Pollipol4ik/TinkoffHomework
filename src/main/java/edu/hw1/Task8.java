@@ -9,6 +9,9 @@ public class Task8 {
     }
 
     public static boolean isSafe(int[][] board) {
+        if (board == null) {
+            throw new NullPointerException("Empty array");
+        }
         int[] dx = {POSITION, POSITION, -1, -1, 1, 1, 2, 2};
         int[] dy = {-1, 1, POSITION, 2, POSITION, 2, -1, 1};
         int n = board.length;

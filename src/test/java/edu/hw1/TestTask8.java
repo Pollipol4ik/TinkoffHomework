@@ -1,6 +1,7 @@
 package edu.hw1;
 
 import org.junit.jupiter.api.DisplayName;
+
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,6 +9,7 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class TestTask8 {
     @ParameterizedTest
@@ -52,7 +54,28 @@ final class ArgumentProviderEighth implements ArgumentsProvider {
                 {0, 0, 0, 0, 0, 1, 0, 1},
                 {1, 0, 0, 0, 1, 0, 1, 0},
                 {0, 0, 0, 1, 0, 1, 0, 1}
+            }, false),
+            Arguments.of(new int[][] {
+                {0, 1, 0, 1, 0, 1, 0, 1},
+                {0, 0, 0, 0, 1, 0, 1, 0},
+                {0, 0, 1, 0, 0, 1, 0, 1},
+                {1, 0, 0, 0, 1, 0, 1, 0},
+                {0, 0, 0, 0, 0, 1, 0, 1},
+                {1, 0, 0, 0, 1, 0, 1, 0},
+                {0, 0, 0, 1, 0, 1, 0, 1}
+            }, false),
+            Arguments.of(new int[][] {
+                {1, 0, 1, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 1, 0, 1, 0, 1, 0},
+                {0, 0, 0, 0, 1, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0, 1, 0, 1, 0},
+                {1, 0, 0, 0, 1, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 1, 0, 1, 0},
+                {1, 0, 0, 0, 1, 0, 1, 0, 0},
+                {0, 0, 0, 1, 0, 1, 0, 1, 0}
             }, false)
         );
     }
+
+
 }

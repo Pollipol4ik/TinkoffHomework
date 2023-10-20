@@ -11,8 +11,6 @@ public class TestTask5 {
         "11, true",
         "121, true",
         "323, true"
-
-
     })
     @DisplayName("Ввод строк являющихся палиндром")
     public void testIsPalindrome(int input, boolean ans) {
@@ -43,6 +41,16 @@ public class TestTask5 {
     })
     @DisplayName("Ввод строк не содержащих палиндром")
     public void testIsNotPalindromeDescendant(int input, boolean ans) {
+        assertThat(Task5.isPalindromeDescendant(input)).isEqualTo(ans);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+        "-121, false",
+        "-5678, false"
+    })
+    @DisplayName("Ввод отрицательных чисел")
+    public void isPalindromeDescendanIsNegative(int input,boolean ans ) {
         assertThat(Task5.isPalindromeDescendant(input)).isEqualTo(ans);
     }
 }

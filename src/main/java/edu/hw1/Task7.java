@@ -6,6 +6,9 @@ public class Task7 {
     }
 
     public static int rotateLeft(int n, int shift) {
+        if (n < 0 || shift < 0) {
+            return -1;
+        }
         int cnt = 1;
         int m = n;
         while ((m >>= 1) != 0) {
@@ -18,6 +21,9 @@ public class Task7 {
     }
 
     public static int rotateRight(int n, int shift) {
+        if (n < 0 || shift < 0) {
+            return -1;
+        }
         int cnt = 1;
         int m = n;
         while ((m >>= 1) != 0) {

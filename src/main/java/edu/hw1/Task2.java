@@ -13,7 +13,8 @@ public class Task2 {
         }
 
         int count = 0;
-        int num = number;
+        int num = Math.abs(number);
+
         while (num != 0) {
             num /= TEN;
             count++;
@@ -21,5 +22,4 @@ public class Task2 {
 
         return count;
     }
-
 }
