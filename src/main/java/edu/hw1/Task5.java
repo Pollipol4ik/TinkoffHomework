@@ -18,7 +18,6 @@ public class Task5 {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -52,7 +51,6 @@ public class Task5 {
             }
             res = res.concat(String.valueOf(num.charAt(sizeNum - 1)));
         }
-
         return Integer.parseInt(res);
     }
 

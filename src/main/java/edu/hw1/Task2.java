@@ -18,7 +18,6 @@ public class Task2 {
             num /= TEN;
             count++;
         }
-
         return count;
     }
 

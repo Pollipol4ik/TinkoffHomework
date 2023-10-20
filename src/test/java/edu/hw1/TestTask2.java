@@ -10,6 +10,7 @@ public class TestTask2 {
     @CsvSource({
         "0, 1",
         "5, 1",
+        "10, 2",
         "-5, 1",
         "544, 3",
         "-123, 3",
