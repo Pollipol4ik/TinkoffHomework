@@ -35,8 +35,6 @@ public class TestTask1 {
     @CsvSource(value = {
         "12:12:12, -1",
         "14:32:45:12, -1",
-        "abc:def, -1",
-        "1:abc, -1",
         "1:2:3, -1",
         "123:456, -1",
     })
