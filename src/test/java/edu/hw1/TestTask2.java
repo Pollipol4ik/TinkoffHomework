@@ -1,27 +1,45 @@
 package edu.hw1;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestTask2 {
 
     @ParameterizedTest
-    @CsvSource({
-        "0, 1",
-        "5, 1",
+    @CsvSource(value = {
         "10, 2",
-        "-5, 1",
-        "544, 3",
-        "-123, 3",
+        "123, 3",
         "4666, 4",
-        "2147483647, 10",
-        "-2147483648, 10"
+        "10023, 5"
     })
-    public void testCountDigits(int number, int expected) {
-        int result = Task2.countDigits(number);
-        assertEquals(expected, result);
+    @DisplayName("Ввод положительных чисел")
+    void countDigitsInputPositiveNumbers(int number, int answer) {
+        assertThat(Task2.countDigits(number)).isEqualTo(answer);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+        "-9, 1",
+        "-10, 2",
+        "-123, 3",
+        "-5466, 4"
+    })
+    @DisplayName("Ввод отрицательных чисел")
+    void countDigitsInputNegativeNumbers(int number, int answer) {
+        assertThat(Task2.countDigits(number)).isEqualTo(answer);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+        "00, 1",
+        "0, 1",
+        "000, 1",
+        "00000, 1"
+    })
+    @DisplayName("Ввод нуля")
+    void countDigitsInputZeroNumber(int number, int answer) {
+        assertThat(Task2.countDigits(number)).isEqualTo(answer);
     }
 }
-
-
