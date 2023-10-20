@@ -23,10 +23,22 @@ public class TestTask1 {
         "10:60, -1",
         "13:62, -1",
         "-4:23, -1"
+
     })
     @DisplayName("Ввод строки c неправильным временем")
     public void minutesToSeconds_shouldReturnValue_whenIncorrectTime(String input, int ans) {
         assertThat(Task1.getVideoLengthInSeconds(input)).isEqualTo(ans);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+        "12:12:12, -1",
+        "14:32:45:12, -1"
+    })
+    @DisplayName("Ввод строки неправильного формата")
+    public void minutesToSeconds_shouldReturnValue_whenIncorrectStringFormat(String input, int ans) {
+        assertThat(Task1.getVideoLengthInSeconds(input)).isEqualTo(ans);
+    }
+
 }
 

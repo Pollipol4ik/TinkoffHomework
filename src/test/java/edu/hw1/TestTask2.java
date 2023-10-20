@@ -45,21 +45,18 @@ public class TestTask2 {
         "0, 1",
         "10, 2",
         "544, 3",
-        "4666, 4"
-
-    })
-    @DisplayName("Ввод положительного числа")
-    public void testCountDigits(int input, int ans) {
-        assertThat(Task2.countDigits(input)).isEqualTo(ans);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {
+        "4666, 4",
+        "0000, 1",
+        "-22, 2",
         "-123, 3",
-        "-2267, 4"
+        "9, 1",
+        "-4356, 4",
+        "55555, 5",
+        "-55555, 5"
+
     })
-    @DisplayName("Ввод отрицательного числа")
-    public void testCountDigitsNegative(int input, int ans) {
+    @DisplayName("Ввод чисел")
+    public void testCountDigits(int input, int ans) {
         assertThat(Task2.countDigits(input)).isEqualTo(ans);
     }
 }

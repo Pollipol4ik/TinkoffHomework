@@ -13,9 +13,19 @@ public class TestTask6 {
         "6554, 0, 4",
         "1234, 0, 3"
     })
-    @DisplayName("Количество шагов")
+    @DisplayName("Ввод некорректных строк")
     public void testCountSteps(int number, int steps, int ans) {
-        assertThat(Task6.findKaprekarSteps(number,steps)).isEqualTo(ans);
+        assertThat(Task6.findKaprekarSteps(number, steps)).isEqualTo(ans);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+        "123,0, -1",
+        "100000,0,-1"
+    })
+    @DisplayName("Ввод некорректных строк")
+    public void countK_shouldReturnValue_whenIncorrectInput(int number, int steps, int ans) {
+        assertThat(Task6.findKaprekarSteps(number, steps)).isEqualTo(ans);
     }
 
 }

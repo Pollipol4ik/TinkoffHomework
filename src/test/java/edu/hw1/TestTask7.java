@@ -11,7 +11,9 @@ public class TestTask7 {
         "8,1,4",
         "2,1,1",
         "0,2,0",
-        "16,1,8"
+        "16,1,8",
+        "128, 10000, 128"
+
     })
     @DisplayName("Тест сдвига вправо")
     public void rotateRightTest(int input, int shift, int ans) {
@@ -23,7 +25,8 @@ public class TestTask7 {
         "17,2,6",
         "16,1,1",
         "2,1,1",
-        "0,2,0"
+        "0,2,0",
+        "15, 10000, 15"
     })
     @DisplayName("Тест сдвига влево")
     public void rotateLeftTest(int input, int shift, int ans) {

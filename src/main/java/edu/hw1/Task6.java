@@ -6,12 +6,17 @@ public class Task6 {
     private static final int DIGIT = 6174;
     private static final int TEN = 10;
     private static final int DIGIT_SIZE = 4;
+    private final static int MIN_VALUE = 1000;
+    private final static int MAX_VALUE = 9998;
 
     protected Task6() {
 
     }
 
     public static int findKaprekarSteps(int n, int steps) {
+        if (n < MIN_VALUE || n > MAX_VALUE) {
+            return -1;
+        }
         if (n == DIGIT) {
             return steps;
         }
