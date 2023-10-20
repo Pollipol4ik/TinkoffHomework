@@ -12,6 +12,14 @@ public class Task8 {
         if (board == null) {
             throw new NullPointerException("Empty array");
         }
+        if (board.length != SIZE) {
+            throw new IllegalArgumentException("Error!");
+        }
+        for (int i = 0; i < SIZE; i++) {
+            if (board[i].length != SIZE) {
+                throw new IllegalArgumentException("Error too!");
+            }
+        }
         int[] dx = {POSITION, POSITION, -1, -1, 1, 1, 2, 2};
         int[] dy = {-1, 1, POSITION, 2, POSITION, 2, -1, 1};
         int n = board.length;

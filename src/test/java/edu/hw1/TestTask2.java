@@ -15,8 +15,8 @@ public class TestTask2 {
         "10023, 5"
     })
     @DisplayName("Ввод положительных чисел")
-    void countDigitsInputPositiveNumbers(int number, int answer) {
-        assertThat(Task2.countDigits(number)).isEqualTo(answer);
+    void countDigitsInputPositiveNumbers(int number, int ans) {
+        assertThat(Task2.countDigits(number)).isEqualTo(ans);
     }
 
     @ParameterizedTest
@@ -27,8 +27,8 @@ public class TestTask2 {
         "-5466, 4"
     })
     @DisplayName("Ввод отрицательных чисел")
-    void countDigitsInputNegativeNumbers(int number, int answer) {
-        assertThat(Task2.countDigits(number)).isEqualTo(answer);
+    void countDigitsInputNegativeNumbers(int number, int ans) {
+        assertThat(Task2.countDigits(number)).isEqualTo(ans);
     }
 
     @ParameterizedTest
@@ -39,7 +39,7 @@ public class TestTask2 {
         "00000, 1"
     })
     @DisplayName("Ввод нуля")
-    void countDigitsInputZeroNumber(int number, int answer) {
-        assertThat(Task2.countDigits(number)).isEqualTo(answer);
+    void countDigitsInputZeroNumber(int number, int ans) {
+        assertThat(Task2.countDigits(number)).isEqualTo(ans);
     }
 }

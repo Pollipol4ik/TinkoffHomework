@@ -1,81 +1,78 @@
 package edu.hw1;
 
 import org.junit.jupiter.api.DisplayName;
-
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.ArgumentsProvider;
-import org.junit.jupiter.params.provider.ArgumentsSource;
-import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TestTask8 {
-    @ParameterizedTest
-    @ArgumentsSource(ArgumentProviderEighth.class)
-    @DisplayName("Knight board capture test")
-    public void testKnightBoardCapture(int[][] firstArray, boolean ans) {
-        assertThat(Task8.isSafe(firstArray)).isEqualTo(ans);
+    @Test
+    @DisplayName("Кони не могут побить друг друга")
+    public void knightBoardCaptureDonotBeatEachOther() {
+        int[][] board = {
+            {0, 0, 0, 1, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 0, 0, 0, 1, 0, 0},
+            {0, 0, 0, 0, 1, 0, 1, 0},
+            {0, 1, 0, 0, 0, 1, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 0, 0, 0, 0, 0, 1},
+            {0, 0, 0, 0, 1, 0, 0, 0}
+        };
+        assertThat(Task8.isSafe(board)).isTrue();
     }
 
-}
-
-final class ArgumentProviderEighth implements ArgumentsProvider {
-
-    @Override
-    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
-        return Stream.of(
-            Arguments.of(new int[][] {
-                {0, 0, 0, 1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 1, 0, 1, 0},
-                {0, 1, 0, 0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0, 0, 0, 1},
-                {0, 0, 0, 0, 1, 0, 0, 0}
-            }, true),
-            Arguments.of(new int[][] {
-                {0, 0, 0, 0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0, 1, 0, 0},
-                {0, 0, 0, 1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0, 1, 0, 0},
-                {1, 0, 0, 0, 0, 0, 0, 0}}, false),
-            Arguments.of(new int[][] {
-                {1, 0, 1, 0, 1, 0, 1, 0},
-                {0, 1, 0, 1, 0, 1, 0, 1},
-                {0, 0, 0, 0, 1, 0, 1, 0},
-                {0, 0, 1, 0, 0, 1, 0, 1},
-                {1, 0, 0, 0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 0, 1, 0, 1},
-                {1, 0, 0, 0, 1, 0, 1, 0},
-                {0, 0, 0, 1, 0, 1, 0, 1}
-            }, false),
-            Arguments.of(new int[][] {
-                {0, 1, 0, 1, 0, 1, 0, 1},
-                {0, 0, 0, 0, 1, 0, 1, 0},
-                {0, 0, 1, 0, 0, 1, 0, 1},
-                {1, 0, 0, 0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 0, 1, 0, 1},
-                {1, 0, 0, 0, 1, 0, 1, 0},
-                {0, 0, 0, 1, 0, 1, 0, 1}
-            }, false),
-            Arguments.of(new int[][] {
-                {1, 0, 1, 0, 1, 0, 1, 0, 0},
-                {0, 1, 0, 1, 0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 1, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0, 1, 0, 1, 0},
-                {1, 0, 0, 0, 1, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0, 1, 0, 1, 0},
-                {1, 0, 0, 0, 1, 0, 1, 0, 0},
-                {0, 0, 0, 1, 0, 1, 0, 1, 0}
-            }, false)
-        );
+    @Test
+    @DisplayName("Кони могут побить друг друга")
+    public void knightBoardCapture_shouldReturnTrue_whenKnightsCanBeatEachOther() {
+        int[][] board = {
+            {0, 0, 0, 0, 1, 0, 0, 0},
+            {0, 0, 0, 0, 0, 1, 0, 0},
+            {0, 0, 0, 1, 0, 0, 0, 0},
+            {1, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 1, 0, 0, 0},
+            {0, 0, 0, 0, 0, 1, 0, 0},
+            {0, 0, 0, 0, 0, 1, 0, 0},
+            {1, 0, 0, 0, 0, 0, 0, 0}
+        };
+        assertThat(Task8.isSafe(board)).isFalse();
     }
 
+    @Test
+    @DisplayName("Ввод null")
+    public void knightBoardCapture_shouldThrowException_whenNullInput() {
+        int[][] board = null;
+        assertThatThrownBy(() -> Task8.isSafe(board)).isInstanceOf(NullPointerException.class);
+    }
 
+    @Test
+    @DisplayName("height != 8")
+    public void knightBoardCapture_shouldThrowException_whenBoardLengthNotEqualEight() {
+        int[][] board = {
+            {0, 1, 0, 1, 0, 1, 0, 1},
+            {0, 0, 0, 0, 1, 0, 1, 0},
+            {0, 0, 1, 0, 0, 1, 0, 1},
+            {1, 0, 0, 0, 1, 0, 1, 0},
+            {0, 0, 0, 0, 0, 1, 0, 1},
+            {1, 0, 0, 0, 1, 0, 1, 0},
+            {0, 0, 0, 1, 0, 1, 0, 1}
+        };
+        assertThatThrownBy(() -> Task8.isSafe(board)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("weight != 8")
+    public void knightBoardCapture_shouldThrowException_whenBoardWidthNotEqualEight() {
+        int[][] board = {
+            {1, 0, 1, 0, 1, 0, 1, 0, 0},
+            {0, 1, 0, 1, 0, 1, 0, 1, 0},
+            {0, 0, 0, 0, 1, 0, 1, 0, 0},
+            {0, 0, 1, 0, 0, 1, 0, 1, 0},
+            {1, 0, 0, 0, 1, 0, 1, 0, 0},
+            {0, 0, 0, 0, 0, 1, 0, 1, 0},
+            {1, 0, 0, 0, 1, 0, 1, 0, 0},
+            {0, 0, 0, 1, 0, 1, 0, 1, 0}
+        };
+        assertThatThrownBy(() -> Task8.isSafe(board)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
