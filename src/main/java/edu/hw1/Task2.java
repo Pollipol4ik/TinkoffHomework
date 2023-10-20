@@ -15,7 +15,7 @@ public class Task2 {
         int count = 0;
         int num = number;
         while (num != 0) {
-            num /= 10;
+            num /= TEN;
             count++;
         }
 
