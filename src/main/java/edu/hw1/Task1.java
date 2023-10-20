@@ -1,5 +1,7 @@
 package edu.hw1;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Task1 {
     private static final int SECONDS_IN_MINUTE = 60;
@@ -8,23 +10,28 @@ public class Task1 {
 
     }
 
-    public static int getVideoLengthInSeconds(String videoLength) {
-        if (videoLength != null) {
-            String[] timeArray = videoLength.split(":");
-            if (timeArray[0].length() > 1 && timeArray[1].length() == 2 && timeArray.length == 2) {
-                try {
-                    int minutes = Integer.parseInt(timeArray[0]);
-                    int seconds = Integer.parseInt(timeArray[1]);
-                    if (seconds < SECONDS_IN_MINUTE && seconds >= 0 && minutes >= 0) {
-                        return minutes * SECONDS_IN_MINUTE + seconds;
-                    }
-                } catch (NumberFormatException e) {
-                    return -1;
-                }
-            }
+    public static int getVideoLengthInSeconds(String videoLength) throws NumberFormatException {
+
+        if (videoLength == null) {
+            return -1;
         }
+
+        String[] timeArray = videoLength.split(":");
+        if (timeArray.length != 2) {
+            return -1;
+        }
+
+        try {
+            int minutes = Integer.parseInt(timeArray[0]);
+            int seconds = Integer.parseInt(timeArray[1]);
+
+            if (minutes >= 0 && seconds >= 0 && seconds < SECONDS_IN_MINUTE) {
+                return minutes * SECONDS_IN_MINUTE + seconds;
+            }
+        } catch (NumberFormatException e) {
+        }
+
         return -1;
     }
+
 }
-
-
