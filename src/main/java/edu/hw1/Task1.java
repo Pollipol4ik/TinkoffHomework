@@ -1,8 +1,5 @@
 package edu.hw1;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Task1 {
     private static final int SECONDS_IN_MINUTE = 60;
 
