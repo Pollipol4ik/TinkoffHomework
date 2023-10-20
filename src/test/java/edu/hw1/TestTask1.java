@@ -17,7 +17,7 @@ public class TestTask1 {
 
     })
     @DisplayName("Ввод корректной строки")
-    void minutesToSeconds_shouldReturnValue_whenCorrectInput(String video, int seconds) {
+    void minutesToSecondCorrectInput(String video, int seconds) {
         assertThat(Task1.getVideoLengthInSeconds(video)).isEqualTo(seconds);
     }
 
@@ -30,7 +30,7 @@ public class TestTask1 {
         "10:-5, -1",
     })
     @DisplayName("Ввод строки c некорректными данными")
-    void minutesToSeconds_shouldReturnValue_whenIncorrectNumbersInput(String video, int seconds) {
+    void minutesToSecondIncorrect(String video, int seconds) {
         assertThat(Task1.getVideoLengthInSeconds(video)).isEqualTo(seconds);
     }
 
@@ -44,7 +44,7 @@ public class TestTask1 {
         " : , -1"
     })
     @DisplayName("Ввод переменных некорректного типа")
-    void minutesToSeconds_shouldReturnValue_whenIncorrectTypeInput(String video, int seconds) {
+    void minutesToSecondIncorrectTypeInput(String video, int seconds) {
         assertThat(Task1.getVideoLengthInSeconds(video)).isEqualTo(seconds);
     }
 
@@ -57,7 +57,7 @@ public class TestTask1 {
         "1:2:3, -1"
     })
     @DisplayName("Ввод с некорректыми разделителем")
-    void minutesToSeconds_shouldReturnValue_whenIncorrectDividerInput(String video, int seconds) {
+    void minutesToSecondIncorrectInput(String video, int seconds) {
         assertThat(Task1.getVideoLengthInSeconds(video)).isEqualTo(seconds);
     }
 
@@ -67,16 +67,14 @@ public class TestTask1 {
         ":23, -1",
     })
     @DisplayName("Ввод неполной строки")
-    void minutesToSeconds_shouldReturnValue_whenNotFullInputString(String video, int seconds) {
+    void minutesToSecondNotFullInputString(String video, int seconds) {
         assertThat(Task1.getVideoLengthInSeconds(video)).isEqualTo(seconds);
     }
 
     @Test
     @DisplayName("Ввод пустой строки")
-    void minutesToSeconds_shouldReturnValue_whenNullStringInput() {
-        String video = null;
-        assertThat(Task1.getVideoLengthInSeconds(video)).isEqualTo(-1);
-        ;
-    }
+    void minutesToSecondNullStringInput() {
+        assertThat(Task1.getVideoLengthInSeconds(null)).isEqualTo(-1);
+         }
 }
 
