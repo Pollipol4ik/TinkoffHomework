@@ -15,7 +15,7 @@ public class TestTask6 {
         "7641, 0, 1",
         "1234, 0, 3"
     })
-    @DisplayName("Ввод некорректных строк")
+    @DisplayName("Ввод корректных строк")
     public void testCountSteps(int number, int steps, int ans) {
         assertThat(Task6.findKaprekarSteps(number, steps)).isEqualTo(ans);
     }
@@ -28,7 +28,7 @@ public class TestTask6 {
         "999, 0, -1"
     })
     @DisplayName("Ввод некорректных строк")
-    public void countK_shouldReturnValue_whenIncorrectInput(int number, int steps, int ans) {
+    public void countStepsIncorrectInput(int number, int steps, int ans) {
         assertThat(Task6.findKaprekarSteps(number, steps)).isEqualTo(ans);
     }
 

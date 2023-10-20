@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class TestTask8 {
     @Test
     @DisplayName("Кони не могут побить друг друга")
-    public void knightBoardCaptureDonotBeatEachOther() {
+    public void knightBoardCanNotBeatEachOther() {
         int[][] board = {
             {0, 0, 0, 1, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
@@ -24,7 +24,7 @@ public class TestTask8 {
 
     @Test
     @DisplayName("Кони могут побить друг друга")
-    public void knightBoardCapture_shouldReturnTrue_whenKnightsCanBeatEachOther() {
+    public void knightBoardCanBeatEachOther() {
         int[][] board = {
             {0, 0, 0, 0, 1, 0, 0, 0},
             {0, 0, 0, 0, 0, 1, 0, 0},
@@ -40,14 +40,14 @@ public class TestTask8 {
 
     @Test
     @DisplayName("Ввод null")
-    public void knightBoardCapture_shouldThrowException_whenNullInput() {
+    public void knightBoardNullInput() {
         int[][] board = null;
         assertThatThrownBy(() -> Task8.isSafe(board)).isInstanceOf(NullPointerException.class);
     }
 
     @Test
     @DisplayName("height != 8")
-    public void knightBoardCapture_shouldThrowException_whenBoardLengthNotEqualEight() {
+    public void knightBoarHeightNotEqualEight() {
         int[][] board = {
             {0, 1, 0, 1, 0, 1, 0, 1},
             {0, 0, 0, 0, 1, 0, 1, 0},
@@ -62,7 +62,7 @@ public class TestTask8 {
 
     @Test
     @DisplayName("weight != 8")
-    public void knightBoardCapture_shouldThrowException_whenBoardWidthNotEqualEight() {
+    public void knightBoardWidthNotEqualEight() {
         int[][] board = {
             {1, 0, 1, 0, 1, 0, 1, 0, 0},
             {0, 1, 0, 1, 0, 1, 0, 1, 0},

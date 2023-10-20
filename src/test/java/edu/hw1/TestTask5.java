@@ -15,7 +15,7 @@ public class TestTask5 {
         "10101, true",
         "55555, true"
     })
-    @DisplayName("Ввод строк являющихся палиндром")
+    @DisplayName("Ввод строк, являющихся палиндром")
     public void testIsPalindrome(int input, boolean ans) {
         assertThat(Task5.isPalindromeDescendant(input)).isEqualTo(ans);
     }
@@ -29,7 +29,7 @@ public class TestTask5 {
         "314, true"
 
     })
-    @DisplayName("Ввод строк содержащих палиндром")
+    @DisplayName("Ввод строк - потомок палиндром")
     public void testIsPalindromeDescendant(int input, boolean ans) {
         assertThat(Task5.isPalindromeDescendant(input)).isEqualTo(ans);
     }
@@ -55,7 +55,7 @@ public class TestTask5 {
         "-1, false",
     })
     @DisplayName("Ввод отрицательных чисел")
-    public void isPalindromeDescendanIsNegative(int input,boolean ans ) {
+    public void isPalindromeDescendantIsNegative(int input, boolean ans) {
         assertThat(Task5.isPalindromeDescendant(input)).isEqualTo(ans);
     }
 }

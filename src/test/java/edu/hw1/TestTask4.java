@@ -25,14 +25,14 @@ public class TestTask4 {
     }
     @Test
     @DisplayName("Ввод пустой строки")
-    public void fixString_shouldReturnException_whenInputEmpty() {
+    public void fixStringInputEmpty() {
         String input = "";
         assertThatThrownBy(()->Task4.fixString(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("Ввод нулево строки")
-    public void fixString_shouldReturnException_whenInputNull() {
+    public void fixStringInputNull() {
         assertThatThrownBy(()->Task4.fixString(null)).isInstanceOf(NullPointerException.class);
     }
 }
