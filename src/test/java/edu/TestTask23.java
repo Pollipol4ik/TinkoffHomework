@@ -53,7 +53,7 @@ public class TestTask23 {
 
     @Test
     @DisplayName("Тест ConnectionException.getMessage()")
-    void connectionException_shouldReturnMessage_whenCallException() {
+    void connectionExceptionWhenCallException() {
         assertThat(new ConnectionException("new connection exception").getMessage()).isEqualTo(
             "new connection exception");
     }
