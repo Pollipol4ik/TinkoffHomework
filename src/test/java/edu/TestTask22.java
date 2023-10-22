@@ -42,6 +42,20 @@ public class TestTask22 {
 
         assertThat(square.area()).isEqualTo(400.0);
     }
+    static Arguments[] square_test1() {
+        return new Arguments[] {
+            Arguments.of(new Square())
+        };
+    }
+
+    @ParameterizedTest
+    @MethodSource("square_test1")
+    @DisplayName("Сторона квадрата = 0")
+    void squareArea_test1(Square square) {
+        square.setSide(0);
+
+        assertThat(square.area()).isEqualTo(0.0);
+    }
 
     static Arguments[] rectangles_test1() {
         return new Arguments[] {

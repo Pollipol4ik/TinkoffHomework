@@ -14,7 +14,8 @@ public class CalculateTest {
     private static Stream<Arguments> inputConstantTest() {
         return Stream.of(
             Arguments.of(new Constant(7), 7),
-            Arguments.of(new Constant(-1), -1)
+            Arguments.of(new Constant(-1), -1),
+            Arguments.of(new Constant(0), 0)
         );
     }
 
@@ -30,7 +31,8 @@ public class CalculateTest {
             Arguments.of(new Constant(4), new Constant(5), 20),
             Arguments.of(new Constant(-4), new Constant(-5), 20),
             Arguments.of(new Constant(-4), new Constant(5), -20),
-            Arguments.of(new Constant(4), new Constant(-5), -20)
+            Arguments.of(new Constant(4), new Constant(-5), -20),
+            Arguments.of(new Constant(0), new Constant(1), 0)
         );
     }
 
@@ -48,7 +50,8 @@ public class CalculateTest {
     private static Stream<Arguments> inputNegateTest() {
         return Stream.of(
             Arguments.of(new Constant(1), -1),
-            Arguments.of(new Constant(-1), 1)
+            Arguments.of(new Constant(-1), 1),
+            Arguments.of(new Constant(0),0)
         );
     }
 
@@ -65,7 +68,9 @@ public class CalculateTest {
             Arguments.of(new Constant(2), 5, 32),
             Arguments.of(new Constant(-7), 2, 49),
             Arguments.of(new Constant(-3), 3, -27),
-            Arguments.of(new Constant(4), 0.5, 2)
+            Arguments.of(new Constant(4), 0.5, 2),
+            Arguments.of(new Constant(0), 5, 0),
+            Arguments.of(new Constant(4), 0, 1)
         );
     }
 
