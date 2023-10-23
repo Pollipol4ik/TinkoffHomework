@@ -34,6 +34,21 @@ public class ShapesTest {
             Arguments.of(new Square())
         };
     }
+    @Test
+    @DisplayName("Тест неизменяемого квадрата")
+    public void createSquareSide() {
+        Square actual = new Square(10).setSide(5);
+        assertThat(actual.area()).isEqualTo(25);
+    }
+
+    @Test
+    @DisplayName("Тест неизменяемого прямоугольника")
+    public void createRectangleHeightAndWidth() {
+        Rectangle actual = new Rectangle(10, 10)
+            .setHeight(5)
+            .setWidth(5);
+        assertThat(actual.area()).isEqualTo(25);
+    }
 
     @ParameterizedTest
     @MethodSource("rectangles_test1")

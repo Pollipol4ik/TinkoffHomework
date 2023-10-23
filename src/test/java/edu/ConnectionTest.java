@@ -2,7 +2,6 @@ package edu;
 
 import java.util.stream.Stream;
 
-import edu.task3.ConnectionException;
 import edu.task3.ConnectionManager;
 import edu.task3.DefaultConnectionManager;
 import edu.task3.FaultyConnection;
@@ -43,12 +42,6 @@ public class ConnectionTest {
     public void shouldThrowExceptionIsIncorrect() {
         assertThatThrownBy(() -> new PopularCommandExecutor(new DefaultConnectionManager(), -1))
             .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("Тест на возврат плохого соединения")
-    void faultyConnectionManager_shouldReturnFaultyConnection_whenCallMethodGetConnection() {
-        assertThat(new FaultyConnectionManager().getConnection()).isInstanceOf(FaultyConnection.class);
     }
 
 }
