@@ -9,11 +9,11 @@ public class Square extends Rectangle {
 
     }
 
-    public void setSide(int side) {
+    public final Square setSide(int side) {
         if (side < 0) {
             throw new IllegalArgumentException("Side cannot be negative");
         }
-        super.setWidth(side);
-        super.setHeight(side);
+        return new Square(side);
     }
+
 }

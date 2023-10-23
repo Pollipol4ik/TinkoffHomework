@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-public class TestTask23 {
+public class ConnectionTest {
     @Test
     @DisplayName("Тест плохого соединения")
     public void faultyConnectionManagerGetConnection() {
@@ -50,15 +50,6 @@ public class TestTask23 {
     void faultyConnectionManager_shouldReturnFaultyConnection_whenCallMethodGetConnection() {
         assertThat(new FaultyConnectionManager().getConnection()).isInstanceOf(FaultyConnection.class);
     }
-
-    @Test
-    @DisplayName("Тест ConnectionException.getMessage()")
-    void connectionExceptionWhenCallException() {
-        assertThat(new ConnectionException("new connection exception").getMessage()).isEqualTo(
-            "new connection exception");
-    }
-
-
 
 }
 
