@@ -13,8 +13,11 @@ public class NullHandlingComparatorTest {
     @ParameterizedTest
     @NullSource
     @DisplayName("Тест корректной работы с ключом null")
-    public void nullableKey_shouldBeInTreeMap(String nullKey) {
+    public void nullInTreeMap(String nullKey) {
         Map<String, String> treeMap = new TreeMap<>(new NullHandlingComparator());
+        treeMap.put("ab", "sd");
+        treeMap.put("in", "sd");
+        treeMap.put("this", "sd");
         treeMap.put(nullKey, "test");
         assertThat(treeMap.containsKey(null)).isTrue();
     }
