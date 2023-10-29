@@ -11,8 +11,8 @@ import static org.assertj.core.api.Assertions.*;
 public class BackwardIteratorTest {
 
     @Test
-    @DisplayName("Basic test")
-    public void list_shouldReturnBackwardList() {
+    @DisplayName("Тест 1 2 3")
+    public void listReturnBackwardList() {
         Iterator<Integer> iterator = new BackwardIterator<>(List.of(1, 2, 3));
         List<Integer> actual = new ArrayList<>();
         while (iterator.hasNext()) {

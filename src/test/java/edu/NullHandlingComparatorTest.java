@@ -17,7 +17,7 @@ public class NullHandlingComparatorTest {
         Map<String, String> treeMap = new TreeMap<>(new NullHandlingComparator());
         treeMap.put("ab", "sd");
         treeMap.put("in", "sd");
-        treeMap.put("this", "sd");
+        treeMap.put("this", nullKey);
         treeMap.put(nullKey, "test");
         assertThat(treeMap.containsKey(null)).isTrue();
     }

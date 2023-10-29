@@ -25,7 +25,7 @@ public class DictionaryTest {
 
     @ParameterizedTest
     @MethodSource("testsInputs")
-    @DisplayName("Basic tests for #getFrequencyDictionary")
+    @DisplayName("Тест с корректным вводом")
     public <T> void listDictionaryOfItsElements(List<T> testList, Map<T, Integer> expected) {
         Map<T, Integer> actual = FrequencyDictionary.freqDict(testList);
         assertThat(actual).isEqualTo(expected);
@@ -33,7 +33,7 @@ public class DictionaryTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @DisplayName("Empty and null list test")
+    @DisplayName("Тест null и empty")
     public <T> void freqDictNullEmpty(List<T> list) {
         assertThatThrownBy(()->freqDict(list)).isInstanceOf(IllegalArgumentException.class);
     }
