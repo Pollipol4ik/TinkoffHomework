@@ -8,9 +8,7 @@ public class ClusterizeString {
     }
 
     public static List<String> clusterize(String input) {
-        if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("Null or empty string");
-        }
+
         List<String> clusters = new ArrayList<>();
         int balance = 0;
         int balance2 = 0;
@@ -25,16 +23,14 @@ public class ClusterizeString {
                 balance--;
                 currentCluster.append(c);
 
-            }
-            if (c == '[') {
+            } else if (c == '[') {
                 balance2++;
                 currentCluster.append(c);
             } else if (c == ']' && balance2 > 0) {
                 balance2--;
                 currentCluster.append(c);
 
-            }
-            if (c == '{') {
+            } else if (c == '{') {
                 balance3++;
                 currentCluster.append(c);
             } else if (c == '}' && balance3 > 0) {

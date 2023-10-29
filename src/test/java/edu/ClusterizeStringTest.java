@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.*;
 
-
 public class ClusterizeStringTest {
     private static Stream<Arguments> basicTestsInputs() {
         return Stream.of(
@@ -35,13 +34,6 @@ public class ClusterizeStringTest {
     public void bracketsLine_shouldReturnListOfBalancedBracketsClusters(String testBracketLine, String[] expected) {
         String[] actual = ClusterizeString.clusterize(testBracketLine).toArray(new String[0]);
         assertThat(actual).isEqualTo(expected);
-    }
-
-    @NullAndEmptySource
-    @ParameterizedTest
-    @DisplayName("Нулевой или пустой тест")
-    public void bracketsLine_shouldThrowException_whenBracketsLineIsNullOrEmpty(String testBracketLine) {
-        assertThatThrownBy(() -> ClusterizeString.clusterize(testBracketLine)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
