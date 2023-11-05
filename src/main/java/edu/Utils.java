@@ -28,8 +28,5 @@ public final class Utils {
         }
     }
 
-    public static boolean isCoordinateOutOfMaze(int row, int column, int height, int width) {
-        return row < 0 || row >= height || column < 0 || column >= width;
-    }
 }
 
