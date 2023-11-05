@@ -56,7 +56,6 @@ public class ApplicationTest {
         String input = String.format("%d\n%d\n%s\n%s\n%d", width, height, start, end, mazeChoice);
         setMockInput(input);
         Application application = new Application();
-
         assertDoesNotThrow(application::run);
     }
 
