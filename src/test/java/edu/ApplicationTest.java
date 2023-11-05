@@ -45,19 +45,19 @@ public class ApplicationTest {
 
         assertDoesNotThrow(application::run);
     }
-//    @ParameterizedTest
-//    @CsvSource({
-//        "10, 15, 1 1, 1 2, 1",
-//        "15, 10, 1 1, 1 2, 1",
-//        "11, 11, 2 2, 8 8, 3"
-//    })
-//    @DisplayName("Test invalid input")
-//    public void testInValidInput(int width, int height, String start, String end, int mazeChoice) {
-//        String input = String.format("%d\n%d\n%s\n%s\n%d", width, height, start, end, mazeChoice);
-//        setMockInput(input);
-//        Application application = new Application();
-//        assertDoesNotThrow(application::run);
-//    }
+    @ParameterizedTest
+    @CsvSource({
+        "10, 15, 1 1, 1 2, 1",
+        "15, 10, 1 1, 1 2, 1",
+        "11, 11, 2 2, 8 8, 3"
+    })
+    @DisplayName("Test invalid input")
+    public void testInValidInput(int width, int height, String start, String end, int mazeChoice) {
+        String input = String.format("%d\n%d\n%s\n%s\n%d", width, height, start, end, mazeChoice);
+        setMockInput(input);
+        Application application = new Application();
+        assertDoesNotThrow(application::run);
+    }
 
 
 }
