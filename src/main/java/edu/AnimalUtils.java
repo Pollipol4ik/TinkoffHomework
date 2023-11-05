@@ -1,5 +1,6 @@
 package edu;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,8 +10,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
+import java.util.Collection;
 
 public class AnimalUtils {
+    private final static int MIN_HEIGHT = 100;
+
     private AnimalUtils() {
 
     }
@@ -42,25 +46,15 @@ public class AnimalUtils {
             .orElse(null);
     }
 
-    //Задание 5?
+    //Задание 5
     public static Animal.Sex findDominantSex(List<Animal> animals) {
-        long males = animals.stream()
-            .filter(a -> a.sex() == Animal.Sex.M)
-            .count();
-        long females = animals.stream()
-            .filter(a -> a.sex() == Animal.Sex.F)
-            .count();
-
-        if (males > females) {
-            return Animal.Sex.M;
-        } else if (females > males) {
-            return Animal.Sex.F;
-        } else {
-            return null;
-        }
+        return animals.stream().collect(Collectors
+                .groupingBy(Animal::sex, Collectors.counting()))
+            .entrySet().stream()
+            .max(Map.Entry.comparingByValue()).get().getKey();
     }
 
-    //Задание 6?
+    //Задание 6
     public static Map<Animal.Type, Animal> findHeaviestAnimalOfEachType(List<Animal> animals) {
         return animals.stream()
             .collect(Collectors.toMap(
@@ -71,7 +65,7 @@ public class AnimalUtils {
 
     }
 
-    //Задание 7?
+    //Задание 7
     public static Animal findKthOldestAnimal(List<Animal> animals, int k) {
         return animals.stream()
             .sorted(Comparator.comparingInt(Animal::age).reversed())
@@ -103,14 +97,13 @@ public class AnimalUtils {
 
     // Задача 11
     public static List<Animal> findBitingAnimalsAboveHeight(List<Animal> animals) {
-        final int minHeight = 100;
+
         return animals.stream()
-            .filter(Animal::bites)
-            .filter(animal -> animal.height() > minHeight)
-            .collect(Collectors.toList());
+            .filter(animal -> animal.bites() && animal.height() > MIN_HEIGHT)
+            .toList();
     }
 
-    // Задача 12? long
+    // Задача 12
     public static Integer countAnimalsWithWeightExceedingHeight(List<Animal> animals) {
         return (int) animals.stream()
             .filter(animal -> animal.weight() > animal.height())
@@ -121,7 +114,7 @@ public class AnimalUtils {
     public static List<Animal> findAnimalsWithMultipleWordNames(List<Animal> animals) {
         return animals.stream()
             .filter(animal -> animal.name().split(" ").length > 2)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     // Задача 14
@@ -131,10 +124,12 @@ public class AnimalUtils {
     }
 
     // Задача 15
-    public static Map<Animal.Type, Integer> sumWeightsOfAnimalsInAgeRange(List<Animal> animals, int k, int l) {
-        return animals.stream()
-            .filter(animal -> animal.age() >= k && animal.age() <= l)
-            .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(Animal::weight)));
+    public static Integer sumWeightsOfAnimalsInAgeRange(List<Animal> animals, int k, int l) {
+        return animals
+            .stream()
+            .filter(elem -> elem.age() >= k && elem.age() <= l)
+            .mapToInt(Animal::weight)
+            .sum();
     }
 
     // Задача 16
@@ -143,104 +138,60 @@ public class AnimalUtils {
             .sorted(Comparator.comparing(Animal::type)
                 .thenComparing(Animal::sex)
                 .thenComparing(Animal::name))
-            .collect(Collectors.toList());
+            .toList();
     }
 
     // Задача 17
-    public static boolean spidersBiteMoreOftenThanDogs(List<Animal> animals) {
-        long spidersCount = animals.stream()
-            .filter(animal -> animal.type() == Animal.Type.SPIDER && animal.bites())
-            .count();
-        long dogsCount = animals.stream()
-            .filter(animal -> animal.type() == Animal.Type.DOG && animal.bites())
-            .count();
-
-        return spidersCount > dogsCount;
+    public static Boolean spidersBiteMoreOftenThanDogs(List<Animal> animals) {
+        Map<Animal.Type, Integer> map = animals
+            .stream()
+            .filter(elem -> elem.type() == Animal.Type.SPIDER || elem.type() == Animal.Type.DOG)
+            .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(elem -> elem.bites() ? 1 : 0)));
+        return map.getOrDefault(Animal.Type.SPIDER, map.getOrDefault(Animal.Type.DOG, -1))
+            > map.getOrDefault(Animal.Type.DOG, map.getOrDefault(Animal.Type.SPIDER, -1));
     }
 
     // Задача 18
-    public static Animal findHeaviestFishInMultipleLists(List<List<Animal>> animalLists) {
-        Animal heaviestFish = null;
-
-        for (List<Animal> animals : animalLists) {
-            Animal fish = animals.stream()
-                .filter(animal -> animal.type() == Animal.Type.FISH)
-                .max(Comparator.comparingInt(Animal::weight))
-                .orElse(null);
-
-            if (fish != null && (heaviestFish == null || fish.weight() > heaviestFish.weight())) {
-                heaviestFish = fish;
-            }
-        }
-
-        return heaviestFish;
+    public static Animal findHeaviestFishInLists(List<Animal>... animalLists) {
+        return Arrays.stream(animalLists)
+            .flatMap(Collection::stream)
+            .filter(elem -> elem.type() == Animal.Type.FISH)
+            .max(Comparator.comparingInt(Animal::weight)).orElse(null);
     }
 
     // Задача 19
-    public static Map<String, Set<ValidationError>> findAnimalsWithErrors(List<Animal> animals) {
-        Map<String, Set<ValidationError>> animalsWithErrors = new HashMap<>();
+    public static Map<String, Set<ValidationError>> findExceptionsAnimals(List<Animal> animals) {
+        return animals.stream()
+            .filter(elem -> !validateAnimal(elem).isEmpty())
+            .collect(Collectors.toMap(Animal::name, AnimalUtils::validateAnimal));
 
-        for (Animal animal : animals) {
-            Set<ValidationError> errors = new HashSet<>();
-
-            if (animal.name() == null || animal.name().isEmpty()) {
-                errors.add(new ValidationError("name", "Имя не должно быть пустым"));
-            }
-
-            if (animal.age() < 0) {
-                errors.add(new ValidationError("age", "Возраст не может быть отрицательным"));
-            }
-
-            if (animal.height() < 0) {
-                errors.add(new ValidationError("height", "Рост не может быть отрицательным"));
-            }
-
-            if (animal.weight() < 0) {
-                errors.add(new ValidationError("weight", "Вес не может быть отрицательным"));
-            }
-
-            if (!errors.isEmpty()) {
-                animalsWithErrors.put(animal.name(), errors);
-            }
-        }
-
-        return animalsWithErrors;
+    }
+    // Задача 20
+    public static Map<String, String> findValidationExceptionsAnimalsPrettier(List<Animal> animalsList) {
+        return animalsList
+            .stream()
+            .filter(elem -> !validateAnimal(elem).isEmpty())
+            .collect(Collectors.toMap(Animal::name, animal -> validateAnimal(animal)
+                .stream()
+                .map(ValidationError::errorName)
+                .collect(Collectors.joining(", "))));
     }
 
-    // Задача 20
-    public static Map<String, String> findAnimalsWithReadableErrors(List<Animal> animals) {
-        Map<String, String> animalsWithReadableErrors = new HashMap<>();
-
-        for (Animal animal : animals) {
-            StringBuilder errorsStringBuilder = new StringBuilder();
-
-            if (animal.name() == null || animal.name().isEmpty()) {
-                errorsStringBuilder.append("name: Имя не должно быть пустым, ");
-            }
-
-            if (animal.age() < 0) {
-                errorsStringBuilder.append("age: Возраст не может быть отрицательным, ");
-            }
-
-            if (animal.height() < 0) {
-                errorsStringBuilder.append("height: Рост не может быть отрицательным, ");
-            }
-
-            if (animal.weight() < 0) {
-                errorsStringBuilder.append("weight: Вес не может быть отрицательным, ");
-            }
-
-            // Добавьте другие проверки по необходимости.
-
-            if (errorsStringBuilder.length() > 0) {
-                String errorsString = errorsStringBuilder.substring(
-                    0,
-                    errorsStringBuilder.length() - 2
-                );
-                animalsWithReadableErrors.put(animal.name(), errorsString);
-            }
+    private static Set<ValidationError> validateAnimal(Animal animal) {
+        Set<ValidationError> errors = new HashSet<>();
+        if (animal.name() == null || animal.name().isEmpty()) {
+            errors.add(new ValidationError("name", "Name can`t be empty or null!"));
         }
-
-        return animalsWithReadableErrors;
+        if (animal.age() <= 0) {
+            errors.add(new ValidationError("age", "Age can be more than 0!"));
+        }
+        if (animal.height() <= 0) {
+            errors.add(new ValidationError("height", "Height can be more than 0!"));
+        }
+        if (animal.weight() <= 0) {
+            errors.add(new ValidationError("weight", "Weight can be more than 0!"));
+        }
+        return errors;
     }
 }
+
