@@ -1,8 +1,8 @@
 package edu;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
-import java.util.Collection;
 
 public class AnimalUtils {
     private final static int MIN_HEIGHT = 100;
@@ -166,6 +165,7 @@ public class AnimalUtils {
             .collect(Collectors.toMap(Animal::name, AnimalUtils::validateAnimal));
 
     }
+
     // Задача 20
     public static Map<String, String> findValidationExceptionsAnimalsPrettier(List<Animal> animalsList) {
         return animalsList
