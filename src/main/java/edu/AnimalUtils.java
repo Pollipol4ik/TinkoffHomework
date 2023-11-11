@@ -141,13 +141,15 @@ public class AnimalUtils {
     }
 
     // Задача 17
-    public static Boolean spidersBiteMoreOftenThanDogs(List<Animal> animals) {
-        Map<Animal.Type, Integer> map = animals
-            .stream()
-            .filter(elem -> elem.type() == Animal.Type.SPIDER || elem.type() == Animal.Type.DOG)
-            .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(elem -> elem.bites() ? 1 : 0)));
-        return map.getOrDefault(Animal.Type.SPIDER, map.getOrDefault(Animal.Type.DOG, -1))
-            > map.getOrDefault(Animal.Type.DOG, map.getOrDefault(Animal.Type.SPIDER, -1));
+    public static boolean spidersBiteMoreOftenThanDogs(List<Animal> animals) {
+        Map<Animal.Type, Integer> bitesCountByType = animals.stream()
+            .filter(animal -> animal.type() == Animal.Type.SPIDER || animal.type() == Animal.Type.DOG)
+            .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(animal -> animal.bites() ? 1 : 0)));
+
+        int spiderBites = bitesCountByType.getOrDefault(Animal.Type.SPIDER, 0);
+        int dogBites = bitesCountByType.getOrDefault(Animal.Type.DOG, 0);
+
+        return spiderBites > dogBites;
     }
 
     // Задача 18
