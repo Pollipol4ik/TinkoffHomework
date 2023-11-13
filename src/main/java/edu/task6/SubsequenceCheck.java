@@ -4,18 +4,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SubsequenceCheck {
-    public static boolean isSubsequence(String s, String t) {
-        StringBuilder patternBuilder = new StringBuilder();
-        for (char c : s.toCharArray()) {
-            patternBuilder.append(".*").append(c);
+    private SubsequenceCheck() {
+
+    }
+
+    public static boolean isSubsequence(String t, String s) {
+        if (s == null || t == null) {
+            throw new IllegalArgumentException("String can not be null");
         }
-        patternBuilder.append(".*");
-
-        String regex = patternBuilder.toString();
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(t);
-
-        return matcher.matches();
+        Pattern substringPattern = Pattern.compile(s);
+        Matcher substringMatcher = substringPattern.matcher(t);
+        return substringMatcher.find();
     }
 
 }

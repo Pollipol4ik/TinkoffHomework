@@ -1,18 +1,18 @@
 package edu.task8;
 
-import org.apache.commons.lang3.StringUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.lang3.StringUtils;
 
 public class RegexPatterns {
     private static final String NULL_MESSAGE = "binary string should not be null";
-    private static final Pattern FIRST_PATTERN = Pattern.compile("^(.{2})*.$");
-    private static final Pattern SECOND_PATTERN = Pattern.compile("^(0.{2})*.$|^(1.{2})*..$");
+    private static final Pattern FIRST_PATTERN = Pattern.compile("^[01]([01]{2})*$");
+    private static final Pattern SECOND_PATTERN = Pattern.compile("^(0([01]{2})*)|(1[01]([01]{2})*)$");
     private static final Pattern THIRD_PATTERN = Pattern.compile("^(.*0.*){3,}$");
     private static final Pattern FOURTH_PATTERN = Pattern.compile("^(?!11$|111$).*$");
-    private static final Pattern FIFTH_PATTERN = Pattern.compile("^(.{2}1)*.{0,1}$");
-    private static final Pattern SIXTH_PATTERN = Pattern.compile("^(.*0.*){2,}.*1?.*$");
-    private static final Pattern SEVENTH_PATTERN = Pattern.compile("^(?!.*11).*");
+    private static final Pattern FIFTH_PATTERN = Pattern.compile("^(1[01])*1?$");
+    private static final Pattern SIXTH_PATTERN = Pattern.compile("^(0*1){0,}0{2,}1?0*$");
+    private static final Pattern SEVENTH_PATTERN = Pattern.compile("^((?!11)[01]?(?!11))+$");
 
     private RegexPatterns() {
     }

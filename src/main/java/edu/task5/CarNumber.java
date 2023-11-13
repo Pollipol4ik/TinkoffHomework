@@ -1,18 +1,11 @@
 package edu.task5;
 
-import org.apache.commons.lang3.StringUtils;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.lang3.StringUtils;
 
 public class CarNumber {
-//
-//    public static boolean validateLicensePlate(String licensePlate) {
-//        String regex = "^[АВЕКМНОРСТУХABEKMHOPCTYX]{1}\\d{3}[АВЕКМНОРСТУХABEKMHOPCTYX]{2}\\d{2,3}$";
-//        Pattern pattern = Pattern.compile(regex);
-//        Matcher matcher = pattern.matcher(licensePlate);
-//        return matcher.matches();
-//    }
-private static final Pattern CAR_NUMBER_PATTERN = Pattern.compile("^[A-ZА-Я\\d]{1}\\d{3}[A-ZА-Я]{2}\\d{3}$");
+
+    private static final Pattern CAR_NUMBER_PATTERN = Pattern.compile("^[А-Я]\\d{3}[А-Я]{2}\\d{3}$");
 
     private CarNumber() {
     }
