@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CarNumber {
 
-    private static final Pattern CAR_NUMBER_PATTERN = Pattern.compile("^[АВЕКМНОРСТУХ]{1}\\d{3}[АВЕКМНОРСТУХ]{2}\\d{3}$");
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("^[АВЕКМНОРСТУХ]{1}\\d{3}[АВЕКМНОРСТУХ]{2}\\d{3}$");
 
     private CarNumber() {
     }
@@ -14,6 +14,6 @@ public class CarNumber {
         if (StringUtils.isBlank(carNumber)) {
             throw new IllegalArgumentException("carNumber should not be null or empty");
         }
-        return CAR_NUMBER_PATTERN.matcher(carNumber).find();
+        return NUMBER_PATTERN.matcher(carNumber).find();
     }
 }
