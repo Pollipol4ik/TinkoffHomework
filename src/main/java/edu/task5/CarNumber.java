@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CarNumber {
 
-    private static final Pattern CAR_NUMBER_PATTERN = Pattern.compile("^[А-Я]\\d{3}[А-Я]{2}\\d{3}$");
+    private static final Pattern CAR_NUMBER_PATTERN = Pattern.compile("^[АВЕКМНОРСТУХ]{1}\\d{3}[АВЕКМНОРСТУХ]{2}\\d{3}$");
 
     private CarNumber() {
     }

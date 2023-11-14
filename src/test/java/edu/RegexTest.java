@@ -41,7 +41,8 @@ public class RegexTest {
             Arguments.of("1000", true),
             Arguments.of("000", true),
             Arguments.of("34522", false),
-            Arguments.of("1", false)
+            Arguments.of("1", false),
+            Arguments.of("00000", true)
         );
     }
 

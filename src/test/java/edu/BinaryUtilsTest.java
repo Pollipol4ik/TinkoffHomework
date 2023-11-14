@@ -48,7 +48,7 @@ public class BinaryUtilsTest {
             Arguments.of("01"),
             Arguments.of("11110101010"),
             Arguments.of("0110101010101"),
-            Arguments.of("0340")
+            Arguments.of("034")
         );
     }
 

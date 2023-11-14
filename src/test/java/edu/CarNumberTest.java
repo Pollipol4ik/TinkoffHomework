@@ -14,7 +14,7 @@ public class CarNumberTest {
     private static Stream<Arguments> inputsForBasicTestIsCarNumberValid() {
         return Stream.of(
             Arguments.of("А023ВЕ775", true),
-            Arguments.of("В455ОЛ750", true),
+            Arguments.of("Т455ОМ750", true),
             Arguments.of("033ВАК777", false),
             Arguments.of("В033АК75", false),
             Arguments.of("В033АК5555", false)
