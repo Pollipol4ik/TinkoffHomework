@@ -14,20 +14,24 @@ public class ContactList {
 
     private static Contact getContact(String[] inform) {
         Contact contact;
-        if (inform.length == 1) {
-            contact = new Contact(inform[0]);
-        } else {
-            contact = new Contact(inform[0], inform[1]);
+        switch (inform.length) {
+            case 1:
+                contact = new Contact(inform[0]);
+                break;
+            case 2:
+                contact = new Contact(inform[0], inform[1]);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid number of elements in inform array");
         }
         return contact;
     }
-
-
 
     public static List<Contact> parseContacts(String[] inform, String sort) {
         if (inform == null || inform.length == 0) {
             return Collections.emptyList();
         }
+
         List<Contact> contacts = new ArrayList<>();
         for (var per : inform) {
             if (!per.matches(VALID_REGEX)) {
@@ -36,13 +40,18 @@ public class ContactList {
             Contact contact = getContact(per.split(" "));
             contacts.add(contact);
         }
-        if (sort.equals(ORDER_ASC)) {
-            contacts.sort(new ComparatorAsc());
+
+        switch (sort) {
+            case ORDER_ASC:
+                contacts.sort(new ComparatorAsc());
+                break;
+            case ORDER_DESC:
+                contacts.sort(new ComparatorDesc());
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid sorting order");
         }
-        if (sort.equals(ORDER_DESC)) {
-            contacts.sort(new ComparatorDesk());
-        }
+
         return contacts;
     }
-
 }

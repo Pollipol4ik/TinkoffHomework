@@ -2,7 +2,7 @@ package edu.task5;
 
 import java.util.Comparator;
 
-public class ComparatorDesk implements Comparator<Contact> {
+public class ComparatorDesc implements Comparator<Contact> {
     @Override
     public int compare(Contact o1, Contact o2) {
         String compareFirst = o1.surname().isEmpty() ? o1.name() : o1.surname();
