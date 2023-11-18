@@ -1,0 +1,2 @@
+china:town
+tokyo:ghoul
