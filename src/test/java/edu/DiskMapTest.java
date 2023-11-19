@@ -1,6 +1,5 @@
 package edu;
 
-
 import edu.task1.DiskMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DiskMapTest {
-    private final Path filePath = Paths.get("src/main/resources/hw6/diskmap.txt");
+    private final Path filePath = Paths.get("src/main/resources/hw6/diskMap.txt");
     private final Map<String, String> mapForTest = Map.of(
         "java", "script",
         "tokyo", "city"
