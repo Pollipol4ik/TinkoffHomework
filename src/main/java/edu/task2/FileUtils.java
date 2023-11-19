@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-
 public class FileUtils {
 
     private FileUtils() {
     }
+
     private static final String SYMBOL = "\\.";
     private final static String EXCEPTION_MESSAGE = "Невозможно создать файл";
 
