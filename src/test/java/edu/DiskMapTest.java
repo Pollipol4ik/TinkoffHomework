@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DiskMapTest {
     private final Path filePath = Paths.get("src/main/resources/hw6/diskmap.txt");
     private final Map<String, String> mapForTest = Map.of(
-        "china", "town",
-        "tokyo", "ghoul"
+        "java", "script",
+        "tokyo", "city"
     );
 
     @Test
@@ -56,7 +56,7 @@ public class DiskMapTest {
         diskMap.putAll(mapForTest);
         try {
             var lines = Files.readAllLines(filePath);
-            assertTrue(lines.containsAll(List.of("china:town", "tokyo:ghoul")));
+            assertTrue(lines.containsAll(List.of("java:script", "tokyo:city")));
         } catch (IOException ignored) {
         }
     }
@@ -74,7 +74,7 @@ public class DiskMapTest {
     public void containsValue_shouldReturnTrue_whenValueInFile() {
         DiskMap diskMap = new DiskMap();
         diskMap.putAll(mapForTest);
-        assertTrue(diskMap.containsValue("ghoul"));
+        assertTrue(diskMap.containsValue("city"));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class DiskMapTest {
     public void get_shouldReturnStringFromMap() {
         DiskMap diskMap = new DiskMap();
         diskMap.putAll(mapForTest);
-        assertEquals(diskMap.get("tokyo"), "ghoul");
+        assertEquals(diskMap.get("tokyo"), "city");
     }
 
     @Test
@@ -91,7 +91,7 @@ public class DiskMapTest {
         DiskMap diskMap = new DiskMap();
         diskMap.put("Java", "Tinkoff");
         diskMap.putAll(mapForTest);
-        diskMap.remove("china");
+        diskMap.remove("java");
         assertEquals(3, diskMap.size());
     }
 
@@ -100,9 +100,9 @@ public class DiskMapTest {
     public void remove_shouldDeleteLineFromMap() {
         DiskMap diskMap = new DiskMap();
         diskMap.putAll(mapForTest);
-        diskMap.remove("china");
+        diskMap.remove("java");
         try {
-            assertThat(Files.readAllLines(filePath)).containsExactly("tokyo:ghoul");
+            assertThat(Files.readAllLines(filePath)).containsExactly("tokyo:city");
         } catch (IOException ignored) {
         }
     }
@@ -122,7 +122,7 @@ public class DiskMapTest {
         DiskMap diskMap = new DiskMap();
         diskMap.putAll(mapForTest);
         var keys = diskMap.keySet();
-        assertThat(keys).isEqualTo(Set.of("china", "tokyo"));
+        assertThat(keys).isEqualTo(Set.of("java", "tokyo"));
     }
 
     @Test
@@ -131,6 +131,6 @@ public class DiskMapTest {
         DiskMap diskMap = new DiskMap();
         diskMap.putAll(mapForTest);
         var values = diskMap.values();
-        assertThat(values).isEqualTo(Set.of("ghoul", "town"));
+        assertThat(values).isEqualTo(Set.of("city", "script"));
     }
 }

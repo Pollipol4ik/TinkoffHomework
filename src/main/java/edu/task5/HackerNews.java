@@ -5,53 +5,62 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HackerNews {
+    private HackerNews() {
+    }
+
     private final static Pattern TITLE_FINDER = Pattern.compile("\"title\":\"([^\"]*)\"");
 
-    private static final String TOP_STORIES_URL = "https://hacker-news.firebaseio.com/v0/topstories.json";
-    private static final String ITEM_URL_FORMAT = "https://hacker-news.firebaseio.com/v0/item/%d.json";
-
-    private HackerNews() {
-
-    }
-
     public static long[] hackerNewsTopStories() {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(TOP_STORIES_URL)).build();
-
         try {
-            HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return convertStringToLongArray(response.body());
-        } catch (IOException | InterruptedException e) {
-            return new long[0];
-        }
-    }
+            HttpClient httpClient = HttpClient.newHttpClient();
+            HttpResponse<String> response = httpClient.send(
+                HttpRequest.newBuilder()
+                    .uri(URI.create("https://hacker-news.firebaseio.com/v0/topstories.json"))
+                    .GET()
+                    .build(), HttpResponse.BodyHandlers.ofString());
+            return parseStringResponse(response.body());
 
-    private static long[] convertStringToLongArray(String responseBody) {
-        String[] codes = responseBody.replaceAll("[\\[\\]]", "").split(",");
-        return Arrays.stream(codes).mapToLong(Long::parseLong).toArray();
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static String news(long id) {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(ITEM_URL_FORMAT + id + ".json")).build();
 
         try {
-            HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return parseNews(response.body());
+            HttpClient httpClient = HttpClient.newHttpClient();
+            HttpResponse<String> response = httpClient.send(
+                HttpRequest.newBuilder()
+                    .uri(URI.create("https://hacker-news.firebaseio.com/v0/item/" + id + ".json"))
+                    .GET()
+                    .build(), HttpResponse.BodyHandlers.ofString());
+
+            Matcher matcher = TITLE_FINDER.matcher(response.body());
+            if (matcher.find()) {
+                return matcher.group(1);
+            } else {
+                return "";
+            }
         } catch (IOException | InterruptedException e) {
-            return "";
+            throw new RuntimeException(e);
         }
     }
 
-    private static String parseNews(String newsJson) {
-        Pattern pattern = Pattern.compile("\"title\":\"([^\"]+)\"");
-        Matcher matcher = pattern.matcher(newsJson);
-        return matcher.find() ? matcher.group(1) : "";
+    private static long[] parseStringResponse(String response) {
+        String[] strings = response
+            .replaceAll("\\[", "")
+            .replaceAll("]", "")
+            .split(",");
+        long[] ids = new long[strings.length];
+
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = Long.parseLong(strings[i]);
+        }
+        return ids;
     }
 
 }

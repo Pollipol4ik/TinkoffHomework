@@ -1,22 +1,17 @@
 package edu;
 
-import edu.task5.HackerNews;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
+import static edu.task5.HackerNews.hackerNewsTopStories;
+import static edu.task5.HackerNews.news;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HackerNewsTest {
-    @Test
-    @DisplayName("hackerNewsTopStories method test")
-    public void testHackerNewsTopStoriesHTTPResponseCode() {
-        long[] topStories = HackerNews.hackerNewsTopStories();
-        assertThat(topStories).isNotEmpty();
-    }
-
     private static Stream<Arguments> newsForTest() {
         return Stream.of(
             Arguments.of(37570037L, "JDK 21 Release Notes"),
@@ -31,12 +26,18 @@ public class HackerNewsTest {
     @MethodSource("newsForTest")
     @DisplayName("news method test")
     public void news_shouldReturnStringOfTitleOfNewsFromJson(long id, String title) {
-        assertThat(HackerNews.news(id)).isEqualTo(title);
+        assertThat(news(id)).isEqualTo(title);
+    }
+
+    @Test
+    @DisplayName("top news doesnt empty")
+    public void topStories_shouldReturnData() {
+        assertThat(hackerNewsTopStories()).isNotEmpty();
     }
 
     @Test
     @DisplayName("news method with wrong id test")
     public void news_shouldReturnNull() {
-        assertThat(HackerNews.news(-6)).isEmpty();
+        assertThat(news(-6)).isEmpty();
     }
 }

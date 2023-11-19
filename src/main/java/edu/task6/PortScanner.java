@@ -1,16 +1,18 @@
 package edu.task6;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.util.Map;
 
+@SuppressWarnings("RegexpSinglelineJava")
 public class PortScanner {
-    private static final Logger LOGGER = LogManager.getLogger();
-    private static final int MAX_PORT = 49151;
+
+    private PortScanner() {
+    }
+
+    private final static int MAX_PORT = 49151;
     private final static String OUTPUT_FORMAT = "%-9s %-8s %s";
-    private static final Map<Integer, String> MOST_POPULAR_USED_PORTS = Map.ofEntries(
+    private static final Map<Integer, String> MOST_POPULAR_PORTS = Map.ofEntries(
         Map.entry(21, "FTP"),
         Map.entry(22, "SSH"),
         Map.entry(23, "Telnet"),
@@ -31,25 +33,18 @@ public class PortScanner {
         Map.entry(8080, "HTTP Proxy")
     );
 
-    private PortScanner() {
-
-    }
-
     public static void scanPorts() {
-        //System.out.printf((OUTPUT_FORMAT) + "%n", "Протокол", "Порт", "Сервис");
-        LOGGER.info((OUTPUT_FORMAT) + "%n", "Протокол", "Порт", "Сервис");
+        System.out.printf((OUTPUT_FORMAT) + "%n", "Протокол", "Порт", "Сервис");
         for (int i = 0; i <= MAX_PORT; i++) {
             try (ServerSocket serverSocket = new ServerSocket(i)) {
                 //ServerSocket successfully created
             } catch (Exception e) {
-                //System.out.printf((OUTPUT_FORMAT) + "%n", "TSP", i, MOST_POPULAR_USED_PORTS.getOrDefault(i, ""));
-                LOGGER.info((OUTPUT_FORMAT) + "%n", "TSP", i, MOST_POPULAR_USED_PORTS.getOrDefault(i, ""));
+                System.out.printf((OUTPUT_FORMAT) + "%n", "TSP", i, MOST_POPULAR_PORTS.getOrDefault(i, ""));
             }
             try (DatagramSocket datagramSocket = new DatagramSocket(i)) {
                 //DatagramSocket successfully created
             } catch (Exception e) {
-                //System.out.printf((OUTPUT_FORMAT) + "%n", "UDP", i, MOST_POPULAR_USED_PORTS.getOrDefault(i, ""));
-                LOGGER.info((OUTPUT_FORMAT) + "%n", "UDP", i, MOST_POPULAR_USED_PORTS.getOrDefault(i, ""));
+                System.out.printf((OUTPUT_FORMAT) + "%n", "UDP", i, MOST_POPULAR_PORTS.getOrDefault(i, ""));
             }
         }
     }

@@ -1,2 +1,2 @@
-china:town
-tokyo:ghoul
+tokyo:city
+java:script

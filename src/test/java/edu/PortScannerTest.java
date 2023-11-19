@@ -1,6 +1,5 @@
 package edu;
 
-
 import edu.task6.PortScanner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

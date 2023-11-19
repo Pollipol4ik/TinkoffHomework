@@ -1,11 +1,11 @@
 package edu.task1;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -18,13 +18,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class DiskMap implements Map<String, String> {
     private static final Logger LOGGER = LogManager.getLogger();
-    private final Path filePath;
+    private final Path filePath = Path.of("src/main/resources/hw6/diskMap.txt");
     private int sizeOfMap = 0;
     private static final String EXCEPTION_MESSAGE = "IOException has been called";
 
-
     public DiskMap() {
-        filePath = Paths.get("src/main/resources/hw6/diskMap.txt");
+
         try {
             if (Files.exists(filePath)) {
                 Files.delete(filePath);
@@ -37,7 +36,7 @@ public class DiskMap implements Map<String, String> {
 
     @Override
     public int size() {
-      return sizeOfMap;
+        return sizeOfMap;
     }
 
     @Override
@@ -50,7 +49,6 @@ public class DiskMap implements Map<String, String> {
             return false;
         }
     }
-
 
     @Override
     public boolean containsKey(Object key) {
@@ -105,7 +103,6 @@ public class DiskMap implements Map<String, String> {
         }
         return null;
     }
-
 
     @Override
     public String remove(Object key) {
@@ -162,17 +159,17 @@ public class DiskMap implements Map<String, String> {
     @NotNull
     @Override
     public Collection<String> values() {
-        List<String> valuesList = new ArrayList<>();
-        try {
-            var file = Files.readAllLines(filePath);
-            for (String line : file) {
-                String value = line.split(":")[1];
-                valuesList.add(value);
+        Set<String> values = new HashSet<>();
+        try (BufferedReader reader = Files.newBufferedReader(filePath, StandardCharsets.UTF_8)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] keyValuePair = line.split(":");
+                values.add(keyValuePair[1]);
             }
-        } catch (IOException e) {
-            LOGGER.info(EXCEPTION_MESSAGE);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return valuesList;
+        return values;
     }
 
     @NotNull

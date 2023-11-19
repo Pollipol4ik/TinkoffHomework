@@ -1,42 +1,61 @@
 package edu;
 
-import java.nio.file.Path;
-import edu.task2.FileUtils;
-
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import java.io.IOException;
 import java.nio.file.Files;
-
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
-import static org.junit.jupiter.api.Assertions.*;
+import static edu.task2.FileUtils.cloneFile;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class FileUtilsTest {
+public class FileUtilsTest {
 
-    private static final String TEST_FILES_DIRECTORY = "src/test/resources/";
 
-    @ParameterizedTest
-    @MethodSource("providePathsToClone")
-    void testCloneFile(Path filePath) {
+    private final Path currentWorkingDir = Paths.get("").toAbsolutePath();
+    private final Path filePath = currentWorkingDir.resolve("src/main/resources/hw6/test.txt");
+    private final Path copyPath = currentWorkingDir.resolve("src/main/resources/hw6/test - копия.txt");
+    private final Path secondCopyPath = currentWorkingDir.resolve("src/main/resources/hw6/test - копия (2).txt");
 
+
+    @BeforeEach
+    void deleteCopies() throws IOException {
+        Files.deleteIfExists(filePath);
+        Files.deleteIfExists(copyPath);
+        Files.deleteIfExists(secondCopyPath);
+    }
+
+    @Test
+    @DisplayName("First copy exist test")
+    public void cloneFiles_shouldCreateFile() {
+        cloneFile(filePath);
         assertTrue(Files.exists(filePath));
-
-        FileUtils.cloneFile(filePath);
-
-        assertTrue(Files.exists(getClonedFilePath(filePath)));
-    }
-    private static Stream<Path> providePathsToClone() {
-        return Stream.of(
-            Paths.get(TEST_FILES_DIRECTORY, "test.txt")
-            //Paths.get(TEST_FILES_DIRECTORY, "anotherFile.txt")
-
-        );
     }
 
-    // Helper method to get the path of the cloned file
-    private Path getClonedFilePath(Path originalFilePath) {
-        String fileName = originalFilePath.getFileName().toString();
-        String clonedFileName = fileName.replaceFirst("\\.",  " – копия" + "\\.");
-        return originalFilePath.getParent().resolve(clonedFileName);
+    @Test
+    @DisplayName("Second copy exist test")
+    public void cloneFiles_shouldCreateSecondCopyOfFile() {
+        cloneFile(filePath);
+        cloneFile(filePath);
+        assertTrue(Files.exists(copyPath));
+    }
+
+    @Test
+    @DisplayName("First copy delete then clone again")
+    public void cloneFiles_shouldCreateFirstCopyOfFile_whenSecondCopyExists() throws IOException {
+        cloneFile(filePath);
+        cloneFile(filePath);
+        Files.delete(copyPath);
+        cloneFile(filePath);
+        assertTrue(Files.exists(copyPath));
+    }
+    @Test
+    @DisplayName("Second copy test")
+    public void cloneFiles_shouldCreateSecondCopy() throws IOException{
+        cloneFile(filePath);
+        cloneFile(filePath);
+        cloneFile(filePath);
+        assertTrue(Files.exists(secondCopyPath));
     }
 }
