@@ -1,6 +1,5 @@
 package edu.metrics;
 
-
 import java.nio.file.Path;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -17,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import static edu.TestUtils.logsForTests;
 import static edu.parser.pathparser.PathParser.getPaths;
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 public class InfoBuilderTest {
     private final OffsetDateTime fromDateOffset = OffsetDateTime.of(2023, 10, 5, 0, 0, 0, 0, ZoneOffset.UTC);
@@ -44,39 +42,4 @@ public class InfoBuilderTest {
         );
     }
 
-//    @Test
-//    @DisplayName("Two files with date main metric build test")
-//    public void build_shouldReturnMetricForMainInfoWithoutSomeLogs() {
-//        Receiver receiver;
-//        List<Path> pathsToLogs = getPaths("src/main/resources/*");
-//        receiver = new PathLogReceiver(pathsToLogs);
-//        LogParser logParser = new NginxLogParser();
-//        List<Log> logs = filterLogsByDate(logParser.parseLogs(receiver.receive()));
-//        InfoBuilder metricBuilder = new InfoBuilder(
-//            fromDateOffset,
-//            toDateOffset,
-//            List.of(
-//                "src/main/resources/log1.txt", "src/main/resources/log2.txt"
-//            )
-//        );
-//        assertThat(metricBuilder.build(logs)).isEqualTo(
-//            new Metric(
-//                "Общая информация", List.of
-//                (
-//                    "Метрика|Значение",
-//                    "Файл(ы)|`src/main/resources/log1.txt`, `src/main/resources/log2.txt`",
-//                    "Начальная дата|05.10.2023",
-//                    "Конечная дата|07.10.2023",
-//                    "Количество запросов|4",
-//                    "Средний размер ответа|1479.0"
-//                )
-//            )
-//        );
-//    }
-//
-//    private List<Log> filterLogsByDate(List<Log> logs) {
-//        return logs.stream()
-//            .filter(log -> (log.date().isBefore(toDateOffset) && log.date().isAfter(fromDateOffset)))
-//            .toList();
-//    }
 }
