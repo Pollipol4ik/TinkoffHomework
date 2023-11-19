@@ -1,8 +1,5 @@
 package edu.model;
 
-import lombok.Builder;
 
-@Builder
-public record Response(int statusCode, int bodyBytesSend) {
-
+public record Response(int code, int bytesSend) {
 }

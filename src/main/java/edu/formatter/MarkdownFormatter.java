@@ -1,86 +1,38 @@
 package edu.formatter;
 
-import edu.model.Components;
-import java.util.List;
+import edu.model.metrics.Metric;
 
 public class MarkdownFormatter extends StatusFormatter {
 
     @Override
-    public String format(Components formatterComponent) {
-        StringBuilder formattedLog = new StringBuilder();
-        int[] columnMaxWidth = new int[formatterComponent.tableHeaders().size()];
-        calculateColumnMaxWidth(columnMaxWidth, formatterComponent);
-        return formattedLog
-            .append(formatHeader(formatterComponent.header()))
-            .append(formatTableHeaders(formatterComponent.tableHeaders(), columnMaxWidth))
-            .append(formatTableRows(formatterComponent.lines(), columnMaxWidth))
-            .toString();
+    public String print(Metric metric) {
+        StringBuilder metricSb = new StringBuilder();
+        appendHeader(metricSb, "#### ", metric.header());
+        int[] maxSpaces = getMaxSpacesForEachColumn(metric.table());
+
+        makeRow(metric.table().get(0), maxSpaces, metricSb);
+
+        for (int maxSpace : maxSpaces) {
+            metricSb.append(SPLITTER).append(":").append("-".repeat(Math.max(0, maxSpace - 2))).append(":");
+        }
+
+        metricSb.append(SPLITTER).append('\n');
+
+        for (int i = 1; i < metric.table().size(); i++) {
+            makeRow(metric.table().get(i), maxSpaces, metricSb);
+        }
+
+        return metricSb.toString();
     }
 
-    @Override
-    protected String formatHeader(String header) {
-        return "### " + header + "\n";
-    }
+    private void makeRow(String row, int[] maxSpaces, StringBuilder metricSb) {
+        String[] rowData = row.split(REGEX_SPLITTER);
 
-    @Override
-    protected String formatTableHeaders(List<String> tableHeaders, int[] columnMaxWidth) {
-//        StringBuilder formattedTableHeaders = new StringBuilder();
-//        formattedTableHeaders.append("|");
-//        for (int i = 0; i < columnMaxWidth.length; i++) {
-//            formattedTableHeaders.append(" ".repeat(columnMaxWidth[i] + 2))
-//                .append("|");
-//        }
-//        formattedTableHeaders.append("\n");
-//        for (int i = 0; i < tableHeaders.size(); i++) {
-//            String header = tableHeaders.get(i);
-//            formattedTableHeaders
-//                .append("| ")
-//                .append(header)
-//                .append(" ".repeat(columnMaxWidth[i] - header.length() + 1));
-//        }
-//        formattedTableHeaders
-//            .append("|\n")
-//            .append("|")
-//            .append("|".repeat(columnMaxWidth.length))
-//            .append("\n");
-//        return formattedTableHeaders.toString();
-        StringBuilder formattedTableHeaders = new StringBuilder();
-        for (int i = 0; i < tableHeaders.size(); i++) {
-            String header = tableHeaders.get(i);
-            formattedTableHeaders
-                .append("|")
-                .append(" ".repeat(columnMaxWidth[i] - header.length()))
-                .append(header);
+        for (int i = 0; i < rowData.length; i++) {
+            metricSb.append(SPLITTER).append(" ".repeat(Math.max(0, maxSpaces[i] - rowData[i].length())))
+                .append(rowData[i]);
         }
-        formattedTableHeaders
-            .append("|")
-            .append("\n")
-            .append("|");
 
-        for (int i = 0; i < columnMaxWidth.length; i++) {
-            formattedTableHeaders
-                .append(":")
-                .append("-".repeat(columnMaxWidth[i] - 2))
-                .append(":|");
-        }
-        formattedTableHeaders.append("\n");
-
-        return formattedTableHeaders.toString();
-    }
-
-    @Override
-    protected String formatTableRows(List<String> tableRows, int[] columnMaxWidth) {
-        StringBuilder formattedTableRows = new StringBuilder();
-        for (String row : tableRows) {
-            String[] separatedRow = row.split(SEPARATOR);
-            for (int i = 0; i < separatedRow.length; i++) {
-                formattedTableRows
-                    .append("|")
-                    .append(" ".repeat(columnMaxWidth[i] - separatedRow[i].length()))
-                    .append(separatedRow[i]);
-            }
-            formattedTableRows.append("|").append("\n");
-        }
-        return formattedTableRows.toString();
+        metricSb.append(SPLITTER).append('\n');
     }
 }

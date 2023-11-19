@@ -1,8 +1,5 @@
 package edu.model;
 
-import lombok.Builder;
 
-@Builder
-public record Request(String type, String resource, String protocolVersion, String userAgent) {
-
+public record Request(String method, String url, String protocol, String userAgent) {
 }

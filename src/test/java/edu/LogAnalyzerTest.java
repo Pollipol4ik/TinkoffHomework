@@ -1,19 +1,16 @@
 package edu;
 
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LogAnalyzerTest {
+    private final String[] args = {"--path", "src/main/resources/log1.txt", "--format", "adoc"};
 
     @Test
-    @DisplayName("#run test")
-    public void run_shouldNotThrowAnyException_whenEverythingIsRight() {
-        Assertions.assertDoesNotThrow(() -> new LogAnalyzer(new String[] {"--path",
-            "logs/logFirst.txt",
-            "logs/logSecond.txt",
-            "--format",
-            "markdown", "--from", "2023-03-22", "--to", "2023-03-26"}).run());
+    @DisplayName("Application start test")
+    public void run_shouldNotThrowAnyException() {
+        LogAnalyzer logParserApplication = new LogAnalyzer();
+        assertDoesNotThrow(() -> logParserApplication.run(args));
     }
 }
