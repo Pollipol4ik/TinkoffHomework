@@ -1,25 +1,34 @@
 package edu.task3;
 
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.regex.Pattern;
 
-public class FilterUtils {
 
-    public static final int DOT_CODE = 0x89;
-
-    public static DirectoryStream.Filter<Path> filter = magicNumber(DOT_CODE, 'P', 'N', 'G');
-
-    public static AbstractFilter largerThan(int size) {
-        return (path -> Files.size(path) > size);
-    }
-
+public final class FilterUtils {
     private FilterUtils() {
     }
 
+    public static AbstractFilter sizeFilter(Long size) {
+        return file -> Files.size(file) > size;
+    }
 
-    public static AbstractFilter magicNumber(int... magicNumbers) {
+    public static AbstractFilter extensionFilter(String extension) {
+        return file -> {
+            String fileName = file.getFileName().toString();
+            int extensionIndex = fileName.indexOf(".");
+            return fileName.substring(extensionIndex).equals(extension);
+        };
+    }
+
+    public static AbstractFilter regexNameFilter(String regex) {
+        return file -> {
+            String fileName = file.getFileName().toString();
+            Pattern filePattern = Pattern.compile(regex);
+            return filePattern.matcher(fileName).find();
+        };
+    }
+
+    public static AbstractFilter magicNumberFilter(int... magicNumbers) {
         return path -> {
             byte[] bytes = Files.readAllBytes(path);
             if (bytes.length < magicNumbers.length) {
@@ -32,14 +41,5 @@ public class FilterUtils {
             }
             return true;
         };
-    }
-
-    public static AbstractFilter typeMatches(String type) {
-        return (path -> path.getFileName().toString().split("\\.")[1].equals(type));
-    }
-
-    public static AbstractFilter regexContains(String regex) {
-        Pattern pattern = Pattern.compile(regex);
-        return (path -> pattern.matcher(path.getFileName().toString()).find());
     }
 }
