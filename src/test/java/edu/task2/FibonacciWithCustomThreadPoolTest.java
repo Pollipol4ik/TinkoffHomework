@@ -22,6 +22,7 @@ public class FibonacciWithCustomThreadPoolTest {
                 actual.add(Fib.getFib(cur));
             });
         }
+        actual.sort(Integer::compareTo);
         assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
     }
 }
