@@ -15,12 +15,12 @@ public class DefaultDatabaseHackerTest {
         return Stream.of(
             Arguments.of(
                 new HashMap<String, String>() {{
-                    put("0f5b25cd58319cde0e6e33715b66db4c", "user1");
-                    put("1b18e2ffe3a99ea9486ba69c02c72763", "user2");
+                    put("c505a69ec179afb91b357bbbd1b0e60d", "user1");
+                    put("1b62d2b76347ebd300b15b458ce52b39", "user2");
                 }},
                 new HashMap<String, String>() {{
-                    put("user1", "dima");
-                    put("user2", "dmitr");
+                    put("user1", "poly");
+                    put("user2", "danil");
                 }}
             )
         );
