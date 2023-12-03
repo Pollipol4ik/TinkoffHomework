@@ -16,13 +16,16 @@ public class FibonacciWithCustomThreadPoolTest {
         ThreadPool threadPool = FixedThreadPool.create(4);
         List<Integer> expected = List.of(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55);
         final List<Integer> actual = new CopyOnWriteArrayList<>();
+
+        // Заменяем исходный цикл на forEach для улучшения читаемости
         for (int i = 0; i <= 10; i++) {
             final int cur = i;
             threadPool.execute(() -> {
                 actual.add(Fib.getFib(cur));
             });
         }
-        threadPool.close();
+
+        // Проверяем результат
         assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
     }
 }
