@@ -29,11 +29,11 @@ public class FilterUtilsTest {
 
     @Test
     public void filters_shouldCorrectlyFilterFiles() {
-        Path pathFile = Paths.get("src\\main\\resources\\hw6");
+        Path pathFile = Paths.get("src\\test\\java\\edu");
         List<String> paths = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(pathFile, filter)) {
             entries.forEach(path -> paths.add(path.toString()));
-            assertThat(paths).containsExactly("src\\main\\resources\\hw6\\image_hw.PNG");
+            assertThat(paths).containsExactly("src\\test\\java\\edu\\image_hw.PNG");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
