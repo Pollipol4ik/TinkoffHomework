@@ -29,7 +29,7 @@ public class FilterUtilsTest {
 
     @Test
     public void filters_shouldCorrectlyFilterFiles() {
-        Path pathFile = Paths.get("src\\test\\java\\edu");
+        Path pathFile = Paths.get("src/test/java/edu");
         List<String> paths = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(pathFile, filter)) {
             entries.forEach(path -> paths.add(path.toString()));
